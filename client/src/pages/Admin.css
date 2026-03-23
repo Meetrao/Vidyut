@@ -1,0 +1,26 @@
+.admin-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-stats {
+  box-shadow: var(--neo-raised);
+  border-radius: var(--radius-card);
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+  padding: 6px;
+  border-radius: 8px;
+  opacity: 0.6;
+}
+
+.btn-icon:hover {
+  opacity: 1;
+  background: rgba(248, 113, 113, 0.1);
+  transform: scale(1.1);
+}

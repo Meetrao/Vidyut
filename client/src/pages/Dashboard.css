@@ -1,0 +1,51 @@
+.chart-card { padding: 24px; }
+.chart-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.error-banner {
+  background: rgba(248,113,113,0.1);
+  border: 1px solid rgba(248,113,113,0.25);
+  color: var(--danger);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.anomaly-banner {
+  background: rgba(251,191,36,0.08);
+  border: 1px solid rgba(251,191,36,0.3);
+  color: var(--warning);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.anomaly-banner a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.anomaly-banner a:hover { text-decoration: underline; }
+
+.dashboard-filters {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.filter-input {
+  width: 150px !important;
+  padding: 8px 10px !important;
+  font-size: 13px !important;
+}
+.peak-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.peak-toggle input { accent-color: var(--accent); cursor: pointer; }
+
