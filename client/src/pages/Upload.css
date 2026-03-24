@@ -1,3 +1,5 @@
+/* ─── Upload Page ─── */
+
 .upload-card {
   display: flex;
   flex-direction: column;
@@ -5,52 +7,65 @@
 }
 
 .card-header {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .card-title {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-main);
   margin-bottom: 4px;
 }
 
 .card-desc {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
 }
 
+/* Dropzone — Deep Neumorphic Recess */
 .dropzone {
-  border: 2px dashed var(--glass-border);
-  border-radius: 20px;
-  padding: 40px 20px;
+  border: 2px dashed rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 48px 24px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(0, 0, 0, 0.12);
   transition: var(--transition);
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 16px;
   box-shadow: var(--neo-pressed);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.dropzone:hover {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(0, 0, 0, 0.16);
 }
 
 .dropzone.dragging {
   border-color: var(--accent-emerald);
-  background: rgba(16, 185, 129, 0.05);
+  background: rgba(16, 185, 129, 0.04);
+  box-shadow: var(--neo-pressed), 0 0 24px rgba(16, 185, 129, 0.08);
+  transform: scale(1.01);
 }
 
 .dropzone-icon {
   font-size: 3rem;
-  filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.3));
+  filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.25));
+  animation: float 3s ease-in-out infinite;
 }
 
+/* Manual Form */
 .manual-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
+/* Grid override stays in Upload for scope */
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

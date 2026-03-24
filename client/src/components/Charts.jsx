@@ -8,11 +8,13 @@ const CustomTooltip = ({ active, payload, label, unit }) => {
   if (active && payload && payload.length) {
     return (
       <div style={{
-        background: 'rgba(13,20,36,0.95)',
-        border: '1px solid rgba(255,255,255,0.1)',
-        borderRadius: 8,
-        padding: '10px 14px',
+        background: 'rgba(1, 22, 22, 0.95)',
+        border: '1px solid rgba(16, 185, 129, 0.2)',
+        borderRadius: 12,
+        padding: '12px 16px',
         fontSize: 13,
+        backdropFilter: 'blur(12px)',
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)',
       }}>
         <p style={{ color: '#94a3b8', marginBottom: 6, fontSize: 12 }}>{label}</p>
         {payload.map((entry) => (

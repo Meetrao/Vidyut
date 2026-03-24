@@ -4,55 +4,73 @@
   position: fixed;
   left: 0;
   top: 0;
-  background: var(--glass-mint);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(1, 32, 32, 0.85);
+  backdrop-filter: blur(24px) saturate(1.3);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
   border-right: 1px solid var(--glass-border);
   display: flex;
   flex-direction: column;
-  padding: 30px 20px;
+  padding: 32px 20px;
   z-index: 1000;
   transition: var(--transition);
 }
 
+/* Subtle ambient glow along right edge */
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: -1px;
+  width: 1px;
+  height: 60%;
+  background: linear-gradient(180deg, transparent, rgba(16, 185, 129, 0.15), transparent);
+  pointer-events: none;
+}
+
+/* ─── Brand ─── */
 .sidebar-brand {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 50px;
-  padding: 0 10px;
+  gap: 14px;
+  margin-bottom: 48px;
+  padding: 0 8px;
 }
 
 .brand-icon {
-  width: 45px;
-  height: 45px;
+  width: 48px;
+  height: 48px;
   background: var(--emerald-gradient);
-  border-radius: 12px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--neo-float), 0 0 18px rgba(16, 185, 129, 0.15);
+  position: relative;
+  animation: pulseGlow 4s ease-in-out infinite;
 }
 
 .brand-text h1 {
-  font-size: 1.4rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
   color: white;
 }
 
 .brand-text span {
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   color: var(--accent-emerald);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  opacity: 0.8;
 }
 
+/* ─── Navigation ─── */
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
   flex: 1;
 }
 
@@ -60,52 +78,79 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px 20px;
+  padding: 13px 18px;
   text-decoration: none;
   color: var(--text-muted);
   font-weight: 500;
-  border-radius: var(--radius-pill);
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
   transition: var(--transition);
   position: relative;
   overflow: hidden;
 }
 
+.nav-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 3px;
+  height: 60%;
+  border-radius: 0 4px 4px 0;
+  background: var(--accent-emerald);
+  transition: var(--transition-spring);
+}
+
 .nav-link:hover {
   background: rgba(255, 255, 255, 0.03);
-  color: white;
+  color: var(--text-secondary);
 }
 
 .nav-link.active {
   background: var(--glass-mint);
   color: var(--accent-emerald);
-  box-shadow: var(--neo-raised);
+  box-shadow: var(--neo-subtle);
+  font-weight: 600;
+}
+
+.nav-link.active::before {
+  transform: translateY(-50%) scaleY(1);
 }
 
 .nav-icon {
-  font-size: 1.2rem;
-  opacity: 0.8;
+  font-size: 1.15rem;
+  opacity: 0.85;
+  width: 28px;
+  text-align: center;
+}
+
+.nav-label {
+  flex: 1;
 }
 
 .nav-arrow {
   margin-left: auto;
   opacity: 0;
-  transform: translateX(-10px);
-  transition: var(--transition);
+  transform: translateX(-8px);
+  transition: var(--transition-spring);
+  font-size: 0.8rem;
+  color: var(--accent-emerald);
 }
 
 .nav-link:hover .nav-arrow,
 .nav-link.active .nav-arrow {
-  opacity: 1;
+  opacity: 0.7;
   transform: translateX(0);
 }
 
 .admin-link {
-  margin-top: 20px;
+  margin-top: 16px;
+  padding-top: 16px;
   border-top: 1px solid var(--glass-border);
-  padding-top: 20px;
-  border-radius: 0;
 }
 
+/* ─── Footer ─── */
 .sidebar-footer {
   margin-top: auto;
   padding-top: 20px;
@@ -114,8 +159,8 @@
 
 .user-profile {
   background: rgba(0, 0, 0, 0.2);
-  padding: 15px;
-  border-radius: 20px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -123,16 +168,17 @@
 }
 
 .user-avatar {
-  width: 40px;
-  height: 40px;
-  background: var(--emerald-gradient);
+  width: 38px;
+  height: 38px;
+  background: var(--emerald-glow);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 1.1rem;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  font-size: 1rem;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+  color: white;
 }
 
 .user-info {
@@ -142,34 +188,47 @@
 
 .user-name {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--text-main);
 }
 
 .role-badge {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   text-transform: uppercase;
   padding: 2px 8px;
   border-radius: 10px;
-  background: rgba(16, 185, 129, 0.2);
+  background: rgba(16, 185, 129, 0.15);
   color: var(--accent-emerald);
+  letter-spacing: 0.05em;
+  font-weight: 700;
 }
 
 .logout-btn {
-  background: transparent;
-  border: none;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
   color: var(--text-muted);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: var(--transition);
   padding: 8px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--neo-subtle);
 }
 
 .logout-btn:hover {
   color: #fca5a5;
   transform: rotate(90deg);
+  background: rgba(248, 113, 113, 0.08);
+  border-color: rgba(248, 113, 113, 0.15);
+  box-shadow: 0 0 12px rgba(248, 113, 113, 0.1);
 }
 
 @media (max-width: 1024px) {

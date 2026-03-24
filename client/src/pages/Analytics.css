@@ -1,53 +1,63 @@
+/* ─── Analytics Page ─── */
+
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .section-title {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .section-desc {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-muted);
   margin-top: 4px;
 }
 
+/* Recommendation List */
 .rec-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   margin-top: 20px;
 }
 
 .rec-item {
   display: flex;
   gap: 16px;
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-md);
   border: 1px solid var(--glass-border);
   transition: var(--transition);
 }
 
 .rec-item:hover {
-  background: rgba(255, 255, 255, 0.05);
-  transform: translateX(5px);
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateX(6px);
+  border-color: var(--glass-border-hover);
 }
 
 .rec-icon {
-  font-size: 1.5rem;
-  width: 50px;
-  height: 50px;
-  background: var(--bg-space);
+  font-size: 1.4rem;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  background: rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   box-shadow: var(--neo-pressed);
 }
 
@@ -56,26 +66,33 @@
 }
 
 .rec-title {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--accent-emerald);
   margin-bottom: 4px;
 }
 
 .rec-text {
-  font-size: 0.85rem;
+  font-size: 0.83rem;
   color: var(--text-muted);
-  line-height: 1.4;
-  margin-bottom: 8px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+.rec-footer {
+  display: flex;
+  gap: 8px;
 }
 
 .empty-rec {
   text-align: center;
-  padding: 40px;
+  padding: 44px;
   color: var(--text-muted);
   font-style: italic;
+  font-size: 0.9rem;
 }
 
+/* Full-Width Chart */
 .full-width-chart {
   min-height: 420px;
 }

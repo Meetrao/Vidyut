@@ -22,13 +22,14 @@ const CHART_OPTS = {
   plugins: { 
     legend: { labels: { color: '#94a3b8', font: { size: 12, family: 'Inter' } } },
     tooltip: {
-      backgroundColor: 'rgba(1, 22, 22, 0.9)',
+      backgroundColor: 'rgba(1, 22, 22, 0.95)',
       titleFont: { size: 14, family: 'Outfit' },
       bodyFont: { size: 13, family: 'Inter' },
-      padding: 12,
-      cornerRadius: 12,
-      borderColor: 'rgba(16, 185, 129, 0.3)',
-      borderWidth: 1
+      padding: 14,
+      cornerRadius: 14,
+      borderColor: 'rgba(16, 185, 129, 0.25)',
+      borderWidth: 1,
+      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
     }
   },
   scales: {
