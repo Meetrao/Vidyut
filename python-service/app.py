@@ -20,13 +20,20 @@ PEAK_HOURS = list(range(18, 23))  # 6 PM – 10 PM
 
 def detect_anomalies(df: pd.DataFrame, threshold: float = 2.5):
     """Z-score based anomaly detection on units column."""
-    if len(df) < 3:
+    if 'units' not in df.columns or len(df) < 3:
         df['anomaly'] = False
         df['anomalyScore'] = 0.0
         return df
-    z_scores = np.abs(stats.zscore(df['units'].astype(float)))
+    
+    units_series = df['units'].astype(float)
+    if units_series.std() == 0:
+        df['anomaly'] = False
+        df['anomalyScore'] = 0.0
+        return df
+
+    z_scores = np.abs(stats.zscore(units_series))
     df['anomalyScore'] = z_scores.round(4)
-    df['anomaly'] = z_scores > threshold
+    df['anomaly'] = (z_scores > threshold).fillna(False)
     return df
 
 def compute_trend(df: pd.DataFrame):
@@ -45,14 +52,18 @@ def compute_trend(df: pd.DataFrame):
 
 def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     """Clean / normalise incoming data."""
+    if df.empty: return df
     # Drop completely empty rows
     df.dropna(how='all', inplace=True)
     # Ensure numeric columns are numeric
-    for col in ['units', 'cost']:
+    for col in ['units', 'cost', 'hour']:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors='coerce')
-    # Drop rows where units is missing / negative
-    df = df[df['units'].notna() & (df['units'] >= 0)]
+    
+    # Drop rows where units is missing / negative (if column exists)
+    if 'units' in df.columns:
+        df = df[df['units'].notna() & (df['units'] >= 0)]
+    
     # Parse date
     if 'date' in df.columns:
         df['date'] = pd.to_datetime(df['date'], errors='coerce')
@@ -120,7 +131,7 @@ def process():
             'records': df.to_dict(orient='records'),
             'trend': trend,
             'monthly': monthly,
-            'anomalyCount': int(df['anomaly'].sum()),
+            'anomalyCount': int(df['anomaly'].sum()) if 'anomaly' in df.columns else 0,
             'cleanedCount': len(df),
         })
 
@@ -144,7 +155,7 @@ def recommendations():
         df = clean_dataframe(df)
 
         tips = []
-        avg_units = float(df['units'].mean()) if not df.empty else 0
+        avg_units = float(df['units'].mean()) if ('units' in df.columns and not df.empty) else 0
 
         # Rule-based recommendations
         if avg_units > 400:
