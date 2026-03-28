@@ -60,7 +60,3 @@ The Python service handles the "Heavy Lifting":
 - **Trend Analysis**: Uses linear regression to determine if usage is increasing, stable, or decreasing.
 - **Monthly Aggregates**: Groups records by month for historical comparison.
 
----
-
-## 🛡️ License
-All rights reserved © 2026 VIDYUT.
