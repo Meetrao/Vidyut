@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useToast } from '../components/Toast';
 import { uploadCSV, addUsage } from '../services/api';
+import { Link } from 'react-router-dom';
 import './Upload.css';
 
 export default function Upload() {
   const [file, setFile] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [summary, setSummary] = useState(null);
   const { add } = useToast();
   
   const [manualData, setManualData] = useState({
@@ -35,6 +37,7 @@ export default function Upload() {
     try {
       const res = await uploadCSV(formData);
       add(`Successfully imported ${res.data.inserted} records!`, 'success');
+      setSummary(res.data);
       setFile(null);
     } catch (err) {
       add(err.response?.data?.error || 'Upload failed', 'error');
@@ -67,6 +70,36 @@ export default function Upload() {
         <h1 className="page-title">Data Portal</h1>
         <p className="page-subtitle">Feed VIDYUT with your latest consumption records.</p>
       </header>
+
+      {summary && (
+        <div className="card summary-card animate-slide-down" style={{ marginBottom: 32 }}>
+          <div className="summary-header">
+            <h3 className="summary-title">📈 Intelligence Summary</h3>
+            <button className="btn-close" onClick={() => setSummary(null)}>×</button>
+          </div>
+          <div className="summary-content">
+            <div className="summary-stat">
+              <span className="label">Records Sync'd</span>
+              <span className="value">{summary.inserted}</span>
+            </div>
+            <div className="summary-stat">
+              <span className="label">Anomalies Detected</span>
+              <span className={`value ${summary.anomalyCount > 0 ? 'text-red' : 'text-green'}`}>
+                {summary.anomalyCount}
+              </span>
+            </div>
+            {summary.trend && (
+              <div className="summary-stat">
+                <span className="label">Observed Trend</span>
+                <span className="value capitalize">{summary.trend.direction}</span>
+              </div>
+            )}
+            <div className="summary-action">
+              <Link to="/analytics" className="btn btn-ghost">Explore Deep Analytics →</Link>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="grid-2">
         {/* CSV Upload Section */}

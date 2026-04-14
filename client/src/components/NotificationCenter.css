@@ -1,0 +1,151 @@
+.notification-center {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.notification-trigger {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notification-trigger:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.notification-trigger .icon {
+  font-size: 1.2rem;
+}
+
+.notification-trigger .badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--accent-red);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 20px;
+  border: 2px solid var(--bg-deep);
+  box-shadow: 0 2px 8px rgba(248, 113, 113, 0.4);
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: 320px;
+  max-height: 400px;
+  background: rgba(1, 22, 22, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: var(--shadow-xl);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dropdown-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-header h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.dropdown-header .count {
+  font-size: 0.75rem;
+  color: var(--accent-emerald);
+  font-weight: 600;
+}
+
+.dropdown-content {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.notification-item {
+  padding: 14px 20px;
+  display: flex;
+  gap: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.notification-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.notification-item.unread {
+  background: rgba(16, 185, 129, 0.02);
+}
+
+.notification-item.critical .n-title {
+  color: var(--accent-red);
+}
+
+.n-type-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.n-body {
+  flex: 1;
+}
+
+.n-title {
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 2px;
+  color: var(--text-main);
+}
+
+.n-message {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.2;
+}
+
+.n-time {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 4px;
+  display: block;
+}
+
+.unread-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--accent-emerald);
+  border-radius: 50%;
+  position: absolute;
+  top: 18px;
+  right: 12px;
+}
+
+.empty-notifications {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}

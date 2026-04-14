@@ -1,4 +1,6 @@
 const Usage = require('../models/Usage');
+const Notification = require('../models/Notification');
+const Alert = require('../models/Alert');
 const { parseCSV } = require('../services/csvParser');
 const axios = require('axios');
 
@@ -10,8 +12,47 @@ async function callPython(endpoint, payload) {
   try {
     const res = await axios.post(`${PYTHON_URL}${endpoint}`, payload, { timeout: 15000 });
     return { ok: true, data: res.data };
-  } catch {
+  } catch (err) {
+    console.error(`Python Service Error [${endpoint}]:`, err.message);
     return { ok: false, data: null };
+  }
+}
+
+/**
+ * Checks a usage record against user-defined sentinels (Alerts)
+ * and creates Notifications if thresholds are breached.
+ */
+async function checkSentinels(record) {
+  try {
+    const activeAlerts = await Alert.find();
+    for (const alert of activeAlerts) {
+      let breached = false;
+      if (alert.type === 'cost' && record.cost >= alert.threshold) breached = true;
+      if (alert.type === 'units' && record.units >= alert.threshold) breached = true;
+
+      if (breached) {
+        await Notification.create({
+          type: 'sentinel_breach',
+          title: `Sentinel Triggered: ${alert.name}`,
+          message: `Threshold of ${alert.threshold} ${alert.type === 'cost' ? '₹' : 'kWh'} exceeded on ${new Date(record.date).toLocaleDateString()}. Recorded: ${record[alert.type]}`,
+          severity: 'critical',
+          relatedUsage: record._id
+        });
+      }
+    }
+
+    // Also auto-notify for AI-detected anomalies
+    if (record.anomaly) {
+      await Notification.create({
+        type: 'anomaly',
+        title: 'AI Anomaly Detected',
+        message: `System identified an unusual consumption spike of ${record.units} kWh on ${new Date(record.date).toLocaleDateString()}.`,
+        severity: 'warning',
+        relatedUsage: record._id
+      });
+    }
+  } catch (err) {
+    console.error('Sentinel Check Error:', err.message);
   }
 }
 
@@ -177,7 +218,23 @@ exports.exportCSV = async (req, res) => {
 exports.create = async (req, res) => {
   try {
     const { date, units, cost, source, hour } = req.body;
-    const record = await Usage.create({ date, units, cost, source, hour });
+    
+    // Enrich manual entry with Python AI
+    const { ok, data } = await callPython('/process', { records: [{ date, units, cost, source, hour }] });
+    
+    let finalData = { date, units, cost, source, hour };
+    if (ok && data.records && data.records.length > 0) {
+      const enriched = data.records[0];
+      finalData.anomaly = enriched.anomaly;
+      finalData.anomalyScore = enriched.anomalyScore;
+      finalData.peakHour = enriched.peakHour;
+    }
+
+    const record = await Usage.create(finalData);
+    
+    // Async check for sentinels
+    checkSentinels(record);
+
     res.status(201).json(record);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -215,6 +272,15 @@ exports.uploadCSV = async (req, res) => {
     }
 
     const inserted = await Usage.insertMany(enrichedRows, { ordered: false });
+    
+    // Trigger sentinel checks for insertions with anomalies or high breaches
+    // To avoid overloading, we check records that are either anomalies or high-consumption
+    inserted.forEach(record => {
+      if (record.anomaly || record.units > 100) { // Threshold for auto-scanning bulk uploads
+        checkSentinels(record);
+      }
+    });
+
     res.status(201).json({ inserted: inserted.length, anomalyCount, trend });
   } catch (err) {
     res.status(400).json({ error: err.message });

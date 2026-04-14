@@ -6,6 +6,7 @@ require('dotenv').config();
 const usageRoutes = require('./routes/usageRoutes');
 const alertRoutes = require('./routes/alertRoutes');
 const authRoutes = require('./routes/authRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
 const { authenticate } = require('./middleware/auth');
 
 const app = express();
@@ -21,6 +22,7 @@ app.use('/api/auth', authRoutes);
 // Protected routes
 app.use('/api/usage', usageRoutes);  // auth applied inside router
 app.use('/api/alerts', authenticate, alertRoutes);
+app.use('/api/notifications', authenticate, notificationRoutes);
 
 // Database Connection
 const PORT = process.env.PORT || 5000;

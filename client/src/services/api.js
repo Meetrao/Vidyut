@@ -24,3 +24,8 @@ export const register = (data) => API.post('/auth/register', data);
 export const getUsers = () => API.get('/auth/users');
 export const updateUserRole = (id, role) => API.patch(`/auth/users/${id}/role`, { role });
 export const deleteUser = (id) => API.delete(`/auth/users/${id}`);
+
+// Notifications
+export const getNotifications = () => API.get('/notifications');
+export const markNotificationRead = (id) => API.patch(`/notifications/${id}/read`);
+export const deleteNotification = (id) => API.delete(`/notifications/${id}`);
