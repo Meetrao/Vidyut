@@ -58,10 +58,6 @@ export default function Alerts() {
 
   return (
     <div className="animate-fade">
-      <header className="page-header">
-        <h1 className="page-title">Proactive Alerts</h1>
-        <p className="page-subtitle">Configure the VIDYUT sentinel to watch your consumption thresholds.</p>
-      </header>
 
       <div className="grid-2">
         {/* Create Alert Form */}

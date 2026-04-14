@@ -66,10 +66,6 @@ export default function Upload() {
 
   return (
     <div className="animate-fade">
-      <header className="page-header">
-        <h1 className="page-title">Data Portal</h1>
-        <p className="page-subtitle">Feed VIDYUT with your latest consumption records.</p>
-      </header>
 
       {summary && (
         <div className="card summary-card animate-slide-down" style={{ marginBottom: 32 }}>

@@ -93,39 +93,6 @@ export default function Dashboard() {
 
   return (
     <div className="animate-fade">
-      <header className="page-header" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: 24, marginBottom: 40 }}>
-        <div>
-          <h1 className="page-title">Vidyut Dashboard</h1>
-          <p className="page-subtitle">Monitoring India's energy efficiency, one unit at a time.</p>
-        </div>
-        
-        <div className="card" style={{ display: 'flex', gap: 12, padding: '12px 20px', alignItems: 'center' }}>
-          <input
-            className="form-input"
-            type="date"
-            style={{ width: 140, padding: '8px 12px' }}
-            value={filters.from}
-            onChange={(e) => setFilters({ ...filters, from: e.target.value })}
-          />
-          <input
-            className="form-input"
-            type="date"
-            style={{ width: 140, padding: '8px 12px' }}
-            value={filters.to}
-            onChange={(e) => setFilters({ ...filters, to: e.target.value })}
-          />
-          <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: '0.85rem', color: 'var(--text-muted)', marginLeft: 8 }}>
-            <input
-              type="checkbox"
-              style={{ accentColor: 'var(--accent-emerald)' }}
-              checked={filters.peakOnly}
-              onChange={(e) => setFilters({ ...filters, peakOnly: e.target.checked })}
-            />
-            Peak Hours
-          </label>
-        </div>
-      </header>
-
       {error && <div className="card" style={{ color: '#fca5a5', marginBottom: 32, border: '1px solid rgba(248,113,113,0.2)' }}>⚠️ {error}</div>}
 
       {stats?.anomalyCount > 0 && (

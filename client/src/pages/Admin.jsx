@@ -52,10 +52,6 @@ export default function Admin() {
 
   return (
     <div className="animate-fade">
-      <header className="page-header">
-        <h1 className="page-title">Command Center</h1>
-        <p className="page-subtitle">Manage VIDYUT users and administrative privileges.</p>
-      </header>
 
       <div className="card admin-stats animate-fade" style={{ marginBottom: 32, display: 'flex', gap: 40, padding: '30px 40px' }}>
         <div className="admin-stat-item">

@@ -11,6 +11,7 @@ import Admin from './pages/Admin';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Loader from './components/Loader';
+import Header from './components/Header';
 import './index.css';
 
 // Protected layout: redirects to /login if not authenticated
@@ -22,6 +23,7 @@ function ProtectedLayout() {
     <div className="app-layout">
       <Sidebar />
       <main className="main-content">
+        <Header />
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/upload" element={<Upload />} />

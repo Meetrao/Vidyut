@@ -50,41 +50,58 @@ export default function NotificationCenter() {
 
   return (
     <div className="notification-center" ref={dropdownRef}>
-      <button className="notification-trigger" onClick={handleToggle}>
-        <span className="icon">🔔</span>
-        {unreadCount > 0 && <span className="badge">{unreadCount}</span>}
+      <button 
+        className={`notification-trigger ${unreadCount > 0 ? 'has-unread' : ''} ${isOpen ? 'active' : ''}`} 
+        onClick={handleToggle}
+        aria-label="Toggle notifications"
+      >
+        <span className="bell-icon">🔔</span>
+        {unreadCount > 0 && <span className="notification-dot"></span>}
       </button>
 
       {isOpen && (
-        <div className="notification-dropdown animate-slide-down">
+        <div className="notification-dropdown animate-spring">
+          <div className="dropdown-glow-top"></div>
           <div className="dropdown-header">
-            <h3>Notifications</h3>
-            <span className="count">{unreadCount} New</span>
+            <div className="header-meta">
+              <h3>Intelligence Feed</h3>
+              <p>{notifications.length} logs cached</p>
+            </div>
+            {unreadCount > 0 && <span className="unread-pill">{unreadCount} New</span>}
           </div>
-          <div className="dropdown-content">
+          
+          <div className="dropdown-scroll-area">
             {notifications.length > 0 ? (
               notifications.map((n) => (
                 <div 
                   key={n._id} 
-                  className={`notification-item ${n.isRead ? 'read' : 'unread'} ${n.severity}`}
+                  className={`n-card ${n.isRead ? 'read' : 'unread'} ${n.severity}`}
                   onClick={() => !n.isRead && handleMarkRead(n._id)}
                 >
-                  <div className="n-type-icon">
+                  <div className="n-indicator"></div>
+                  <div className="n-icon">
                     {n.type === 'anomaly' ? '🚨' : n.type === 'sentinel_breach' ? '📡' : '💡'}
                   </div>
-                  <div className="n-body">
-                    <p className="n-title">{n.title}</p>
+                  <div className="n-content">
+                    <div className="n-top">
+                      <span className="n-title">{n.title}</span>
+                      <span className="n-time">{new Date(n.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                    </div>
                     <p className="n-message">{n.message}</p>
-                    <span className="n-time">{new Date(n.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                   </div>
-                  {!n.isRead && <div className="unread-dot"></div>}
                 </div>
               ))
             ) : (
-              <div className="empty-notifications">
-                <p>System is calm. No alerts.</p>
+              <div className="n-empty">
+                <div className="n-empty-icon">✨</div>
+                <p>System is healthy.</p>
+                <span>All anomalies processed.</span>
               </div>
             )}
+          </div>
+
+          <div className="dropdown-footer">
+            <button className="btn-text">View All History</button>
           </div>
         </div>
       )}

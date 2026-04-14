@@ -84,10 +84,6 @@ export default function Analytics() {
 
   return (
     <div className="animate-fade">
-      <header className="page-header">
-        <h1 className="page-title">Deep Analytics</h1>
-        <p className="page-subtitle">AI-driven insights from your consumption patterns.</p>
-      </header>
 
       {/* Main Analysis Chart */}
       <div className="card full-width-chart animate-fade" style={{ marginBottom: 32 }}>
