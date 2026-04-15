@@ -11,8 +11,8 @@ export default function Logo({ size = 48, className = '' }) {
       >
         <defs>
           <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#10b981" />
-            <stop offset="50%" stopColor="#06b6d4" />
+            <stop offset="0%" stopColor="#2dd4bf" /> {/* Teal 400 */}
+            <stop offset="50%" stopColor="#14b8a6" /> {/* Teal 500 */}
             <stop offset="100%" stopColor="#0f172a" />
           </linearGradient>
           <filter id="logo-glow" x="-20%" y="-20%" width="140%" height="140%">
