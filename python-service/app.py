@@ -37,15 +37,16 @@ def calculate_indian_baseline(df: pd.DataFrame):
     if df.empty or 'units' not in df.columns:
         return 12.0 # Default urban Indian baseline
     
-    # Use the interquartile range to find the 'steady state' usage, ignoring outliers
     units = df['units'].astype(float)
-    if len(units) < 5: return float(units.mean()) if not units.empty else 12.0
+    if len(units) < 5:
+        baseline = float(units.mean()) if not units.empty else 12.0
+    else:
+        # Use the interquartile range for larger datasets
+        low, high = units.quantile([0.2, 0.8])
+        steady_state = units[(units >= low) & (units <= high)]
+        baseline = float(steady_state.mean())
     
-    low, high = units.quantile([0.2, 0.8])
-    steady_state = units[(units >= low) & (units <= high)]
-    baseline = float(steady_state.mean())
-    
-    # Clip to realistic Indian household range if data is sparse
+    # Clip to realistic Indian household range (8-25 kWh)
     return max(8.0, min(25.0, baseline))
 
 def detect_anomalies(df: pd.DataFrame):
