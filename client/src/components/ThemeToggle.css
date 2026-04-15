@@ -29,13 +29,17 @@
 }
 
 .toggle-icon {
-  font-size: 0.85rem;
-  transition: var(--transition);
-  filter: drop-shadow(0 0 2px rgba(255,255,255,0.2));
+  transition: var(--transition-elite);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.theme-toggle-btn.dark .sun { opacity: 0.3; filter: grayscale(1); }
-.theme-toggle-btn.light .moon { opacity: 0.3; filter: grayscale(1); }
+.sun { color: #fbbf24; }
+.moon { color: var(--accent-emerald); }
+
+.theme-toggle-btn.dark .sun { opacity: 0.3; filter: saturate(0.5); }
+.theme-toggle-btn.light .moon { opacity: 0.3; filter: saturate(0.5); }
 
 .toggle-thumb {
   position: absolute;
