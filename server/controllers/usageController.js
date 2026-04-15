@@ -140,7 +140,15 @@ exports.getStats = async (req, res) => {
 
     const stats = agg[0] || { totalUnits: 0, totalCost: 0, recordCount: 0, avgUnits: 0, avgCost: 0, anomalyCount: 0 };
     delete stats._id;
-    res.json({ ...stats, monthly });
+    
+    // Add contextual Bharat Metadata
+    const bharatMeta = {
+      standardRange: "8–20 kWh/day",
+      context: "Indian Urban Household",
+      currentMonth: new Date().toLocaleString('en-IN', { month: 'long' })
+    };
+
+    res.json({ ...stats, monthly, bharatMeta });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -281,7 +289,12 @@ exports.uploadCSV = async (req, res) => {
       }
     });
 
-    res.status(201).json({ inserted: inserted.length, anomalyCount, trend });
+    res.status(201).json({ 
+      inserted: inserted.length, 
+      anomalyCount, 
+      trend, 
+      baseline: pyData?.baseline || 12.0 
+    });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

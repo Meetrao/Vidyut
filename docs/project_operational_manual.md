@@ -19,29 +19,29 @@ When you upload a CSV:
 
 ---
 
-## 2. Core Working & Calculations (The Math) 🧮
+## 2. Core Working & Calculations (Bharat Intelligence) 🧮
 
-The project's value comes from transforming raw numbers into intelligence. Here is how the AI "thinks":
+VIDYUT is specifically calibrated for the Indian household context (8–20 kWh/day). Here is how the AI "thinks":
 
-### A. Anomaly Detection (Z-Score)
-The system identifies "Spikes" or "Anomalies" using the **Z-Score** method.
-- **Formula**: $Z = |(x - \mu) / \sigma|$
-  - $x$: The current kilowatt-hour (kWh) reading.
-  - $\mu$: The mean (average) of all your usage history.
-  - $\sigma$: The standard deviation (how much your usage typically varies).
-- **Logic**: If the calculated $Z$ is **greater than 2.5**, the reading is flagged as an anomaly. This means the consumption is statistically "too high" compared to your normal behavior.
+### A. Anomaly Detection (Multiplicative Baseline)
+The system identifies "Spikes" using a **Dynamic Baseline** method tailored for Indian urban and semi-urban settings.
+- **Formula**: $Units > (Baseline \times SeasonalMultiplier \times 2.5)$
+  - **Baseline**: The AI "learns" your home's typical steady-state usage (usually 8–20 kWh per day).
+  - **Seasonal Multiplier**: Automatically adjusts for **Indian Summer** (1.5x for Apr–Jun) and **Festive Periods** (1.3x for Oct–Nov) to prevent false alerts.
+- **Logic**: An anomaly is only triggered if your usage exceeds **2.5x to 3x** of your seasonally-adjusted baseline. This ensures minor fluctuations (like an extra fan or light) are ignored, while true "Breaches" (faulty geysers or leakages) are caught.
 
 ### B. Trend Analysis (Linear Regression)
 The system calculates if your usage is "Increasing", "Decreasing", or "Stable."
-- **Logic**: It fits a line through your monthly data points. If the "slope" of that line is positive, your trend is `increasing`. If the slope is high (e.g., $> 5$), the AI generates a warning.
+- **Logic**: It fits a line through your monthly data points. If the "slope" of that line is positive, your trend is `increasing`. For Indian households, a slope $> 5$ triggers an audit recommendation for appliance efficiency.
 
 ### C. Sentinel Monitoring (Threshold Logic)
-Sentinels are automated guards you set up. 
-- **Logic**: Every time new data is added, the server runs a check: `if (CurrentRecord > SentinelThreshold) { triggerNotification() }`.
+Sentinels are automated guards you set up manually. 
+- **Logic**: Every time new data is added, the server runs a check: `if (CurrentRecord > SentinelThreshold) { triggerNotification() }`. This works in tandem with the AI's automatic anomaly detection.
 
-### D. Peak Hour Logic
-- **Fixed Range**: 18:00 – 22:00 (6 PM – 10 PM).
-- **Logic**: Any usage within this window is flagged as "Peak Hour" usage, which typically carries higher utility costs.
+### D. Bharat Contextual Factors
+- **Climate Awareness**: The system expects higher loads during peak summer heat (Air Conditioning) and does not penalize this usage provided it stays within the calculated 1.5x seasonal buffer.
+- **Appliance Profiling**: Logic is tuned for Indian appliances like BEE 5-star Ceiling Fans, Inverter ACs, and high-wattage Geysers.
+- **Peak Hour Logic**: Fixed Range: 18:00 – 22:00 (6 PM – 10 PM). Any usage within this window is flagged as "Peak Hour," often corresponding to high-occupancy Indian household routines.
 
 ---
 

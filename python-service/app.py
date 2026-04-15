@@ -16,26 +16,63 @@ CORS(app)
 # Helpers
 # ──────────────────────────────────────────────────────────────────────────────
 
+# ──────────────────────────────────────────────────────────────────────────────
+# Bharat Intelligence Core (India Contextual Analytics)
+# ──────────────────────────────────────────────────────────────────────────────
+
 PEAK_HOURS = list(range(18, 23))  # 6 PM – 10 PM
 
-def detect_anomalies(df: pd.DataFrame, threshold: float = 1.8):
-    """Z-score based anomaly detection on units column."""
-    if 'units' not in df.columns or len(df) < 3:
+def get_seasonal_multiplier(date_obj):
+    """Returns a multiplier allowing for higher 'Normal' usage during Indian seasons."""
+    if not date_obj or pd.isna(date_obj): return 1.0
+    month = date_obj.month
+    # Indian Summer (Peak AC Load)
+    if month in [4, 5, 6]: return 1.5
+    # Festive Season (Lights, Celebrations)
+    if month in [10, 11]: return 1.3
+    return 1.0
+
+def calculate_indian_baseline(df: pd.DataFrame):
+    """Calculates the typical baseline usage for an Indian household (8-20 kWh range)."""
+    if df.empty or 'units' not in df.columns:
+        return 12.0 # Default urban Indian baseline
+    
+    # Use the interquartile range to find the 'steady state' usage, ignoring outliers
+    units = df['units'].astype(float)
+    if len(units) < 5: return float(units.mean()) if not units.empty else 12.0
+    
+    low, high = units.quantile([0.2, 0.8])
+    steady_state = units[(units >= low) & (units <= high)]
+    baseline = float(steady_state.mean())
+    
+    # Clip to realistic Indian household range if data is sparse
+    return max(8.0, min(25.0, baseline))
+
+def detect_anomalies(df: pd.DataFrame):
+    """
+    Bharat-Aware Anomaly Detection.
+    Triggered if units > (Baseline * Seasonal_Multiplier * 2.5)
+    """
+    if 'units' not in df.columns or df.empty:
         df['anomaly'] = False
         df['anomalyScore'] = 0.0
         return df
     
-    units_series = df['units'].astype(float)
-    if units_series.std() == 0:
-        df['anomaly'] = False
-        df['anomalyScore'] = 0.0
-        return df
+    baseline = calculate_indian_baseline(df)
+    
+    def check_row(row):
+        # Calculate row-specific multiplier based on date
+        season_mod = get_seasonal_multiplier(row.get('date'))
+        # Anomaly threshold: 2.5x of the seasonally adjusted baseline
+        threshold = baseline * season_mod * 2.5
+        is_anomaly = float(row['units']) > threshold
+        # Score is the ratio of usage to the threshold
+        score = float(row['units']) / (baseline * season_mod)
+        return is_anomaly, round(float(score), 4)
 
-    z_scores = np.abs(stats.zscore(units_series))
-    df['anomalyScore'] = np.round(z_scores, 4)
-    # Ensure we handle any potential NaNs from the calculation
-    mask = (z_scores > threshold)
-    df['anomaly'] = np.where(np.isnan(mask), False, mask)
+    results = df.apply(check_row, axis=1)
+    df['anomaly'] = [r[0] for r in results]
+    df['anomalyScore'] = [r[1] for r in results]
     return df
 
 def compute_trend(df: pd.DataFrame):
@@ -55,59 +92,41 @@ def compute_trend(df: pd.DataFrame):
 def clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     """Clean / normalise incoming data."""
     if df.empty: return df
-    # Drop completely empty rows
     df.dropna(how='all', inplace=True)
-    # Ensure numeric columns are numeric
     for col in ['units', 'cost', 'hour']:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors='coerce')
     
-    # Drop rows where units is missing / negative (if column exists)
     if 'units' in df.columns:
         df = df[df['units'].notna() & (df['units'] >= 0)]
     
-    # Parse date
     if 'date' in df.columns:
+        # Save original strings if needed, but ensure datetime for logic
         df['date'] = pd.to_datetime(df['date'], errors='coerce')
         df = df[df['date'].notna()]
     return df.reset_index(drop=True)
 
-
-# ──────────────────────────────────────────────────────────────────────────────
-# Routes
-# ──────────────────────────────────────────────────────────────────────────────
+# ── Routes ────────────────────────────────────────────────────────────────────
 
 @app.route('/health', methods=['GET'])
 def health():
-    return jsonify({'status': 'ok', 'service': 'analytics'})
-
+    return jsonify({'status': 'ok', 'service': 'analytics-bharat'})
 
 @app.route('/process', methods=['POST'])
 def process():
-    """
-    Accepts JSON list of usage records, returns enriched records with
-    anomaly flags, trend info, and monthly aggregates.
-    """
     try:
         body = request.get_json(force=True)
         records = body.get('records', [])
-
-        if not records:
-            return jsonify({'error': 'No records provided'}), 400
+        if not records: return jsonify({'error': 'No records'}), 400
 
         df = pd.DataFrame(records)
         df = clean_dataframe(df)
+        if df.empty: return jsonify({'error': 'Invalid data'}), 400
 
-        if df.empty:
-            return jsonify({'error': 'All records were invalid after cleaning'}), 400
-
-        # Anomaly detection
+        # Bharat Anomaly Detection
         df = detect_anomalies(df)
-
-        # Trend
         trend = compute_trend(df)
 
-        # Monthly aggregates
         if 'date' in df.columns:
             df['month'] = df['date'].dt.to_period('M').astype(str)
             monthly = (
@@ -116,94 +135,81 @@ def process():
                   .reset_index()
                   .to_dict(orient='records')
             )
+            df['date'] = df['date'].astype(str)
         else:
             monthly = []
 
-        # Peak hour flag — if 'hour' column present
         if 'hour' in df.columns:
             df['peakHour'] = df['hour'].astype(int).isin(PEAK_HOURS)
         else:
             df['peakHour'] = False
 
-        # Convert dates back to string for JSON
-        if 'date' in df.columns:
-            df['date'] = df['date'].astype(str)
-
         return jsonify({
             'records': df.to_dict(orient='records'),
             'trend': trend,
             'monthly': monthly,
-            'anomalyCount': int(df['anomaly'].sum()) if 'anomaly' in df.columns else 0,
-            'cleanedCount': len(df),
+            'anomalyCount': int(df['anomaly'].sum()),
+            'baseline': calculate_indian_baseline(df)
         })
-
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-
 @app.route('/recommendations', methods=['POST'])
 def recommendations():
-    """
-    Returns energy-saving recommendations based on usage patterns.
-    """
     try:
         body = request.get_json(force=True)
         records = body.get('records', [])
-
-        if not records:
-            return jsonify({'recommendations': []})
+        if not records: return jsonify({'recommendations': []})
 
         df = pd.DataFrame(records)
         df = clean_dataframe(df)
-
         tips = []
-        avg_units = float(df['units'].mean()) if ('units' in df.columns and not df.empty) else 0
+        
+        avg_units = float(df['units'].mean()) if not df.empty else 0
+        baseline = calculate_indian_baseline(df)
 
-        # Rule-based recommendations
-        if avg_units > 400:
+        # Bharat-Specific Recommendations
+        if avg_units > (baseline * 1.5):
             tips.append({
                 'type': 'high_usage',
                 'severity': 'critical',
-                'title': 'Very High Average Consumption',
-                'message': f'Your average monthly usage is {avg_units:.1f} kWh. '
-                           'Consider replacing old appliances with BEE 5-star rated ones.',
-                'saving': '15–25%',
+                'title': 'High Baseline Deviation',
+                'message': f'Your usage is 50% above your Indian household baseline. Check for persistent AC usage or old refrigerator seals.',
+                'saving': '20–30%',
             })
-        elif avg_units > 250:
+
+        # Summer AC Logic
+        current_month = pd.to_datetime('today').month
+        if current_month in [4, 5, 6]:
             tips.append({
-                'type': 'moderate_usage',
+                'type': 'seasonal',
                 'severity': 'warning',
-                'title': 'Above-Average Consumption',
-                'message': f'Average usage {avg_units:.1f} kWh/month. '
-                           'Check if ACs, geysers, and refrigerators are energy-efficient.',
-                'saving': '10–20%',
+                'title': 'Summer Cooling Strategy',
+                'message': 'Keep ACs at 24°C-26°C for optimal BEE savings. Clean filters for 15% better efficiency.',
+                'saving': '15%',
             })
+        
+        # Inverter/BEE Logic
+        tips.append({
+            'type': 'appliance',
+            'severity': 'info',
+            'title': 'Inverter & BEE Optimization',
+            'message': 'Switching to 5-star BEE Inverter ACs can reduce cooling costs by 30% compared to non-inverter models.',
+            'saving': '30%',
+        })
 
-        if not df.empty and ('units' in df.columns):
-            trend = compute_trend(df)
-            if trend['direction'] == 'increasing' and trend['slope'] > 5:
-                tips.append({
-                    'type': 'increasing_trend',
-                    'severity': 'warning',
-                    'title': 'Rising Consumption Trend',
-                    'message': 'Your electricity usage is growing month-over-month. '
-                               'Audit appliances that may have degraded efficiency.',
-                    'saving': '5–15%',
-                })
-
+        if not df.empty:
             anomaly_count = int(df['anomaly'].sum()) if 'anomaly' in df.columns else 0
             if anomaly_count > 0:
                 tips.append({
                     'type': 'anomalies',
                     'severity': 'critical',
-                    'title': f'{anomaly_count} Anomalous Reading(s) Detected',
-                    'message': f'Unusual spikes were detected. Check for faulty wiring or '
-                               'unauthorized appliance usage.',
+                    'title': f'Sentinel Alert: {anomaly_count} Spikes',
+                    'message': 'Unusual 2.5x-3x spikes detected. This often points to faulty appliance wiring or geysers left on.',
                     'saving': 'Variable',
                 })
 
         return jsonify({'recommendations': tips, 'avgMonthlyUnits': round(avg_units, 2)})
-
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 

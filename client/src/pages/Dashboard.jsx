@@ -103,12 +103,31 @@ export default function Dashboard() {
         <AlertTriangle size={18} /> {error}
       </div>}
 
+      {stats?.bharatMeta && (
+        <div className="card bharat-context-card animate-slide-down" style={{ marginBottom: 24, padding: '16px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div className="badge badge-blue" style={{ fontSize: '0.75rem', letterSpacing: '0.05em' }}>BHARAT INTELLIGENCE</div>
+            <span style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>Context: <strong>{stats.bharatMeta.context}</strong></span>
+          </div>
+          <div style={{ display: 'flex', gap: '24px' }}>
+            <div className="context-stat">
+              <span className="label">Observed Baseline</span>
+              <span className="value">{stats.avgUnits.toFixed(1)} kWh/day</span>
+            </div>
+            <div className="context-stat">
+              <span className="label">Standard Range</span>
+              <span className="value">{stats.bharatMeta.standardRange}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {stats?.anomalyCount > 0 && (
         <div className="card anomaly-banner">
           <div className="banner-icon">⚠️</div>
           <div className="banner-text">
-            <strong>{stats.anomalyCount} Anomalous Reading(s) Detected</strong>
-            <p>Unusual consumption spikes identified in your recent data. <Link to="/analytics">View Analysis →</Link></p>
+            <strong>{stats.anomalyCount} Bharat Sentinel Breach(es)</strong>
+            <p>Consumption spikes > 2.5x baseline identified. <Link to="/analytics">Audit Pattern →</Link></p>
           </div>
         </div>
       )}
