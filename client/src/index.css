@@ -44,21 +44,23 @@
 
 /* ═══ Pearl Silk Mastery Palette ═══ */
 .light-mode {
-  --bg-space: #ffffff; /* Pure Pearl */
+  --bg-space: #ffffff;
   --bg-deep-teal: #f8fafc;
-  --bg-glass: rgba(255, 255, 255, 0.08);
-  --bg-card: rgba(255, 255, 255, 0.1);
-  --bg-card-hover: rgba(255, 255, 255, 0.25);
+  --bg-glass: rgba(255, 255, 255, 0.12); /* Increased for clarity */
+  --bg-card: rgba(255, 255, 255, 0.15);
+  --bg-card-hover: rgba(255, 255, 255, 0.3);
 
-  --glass-border: rgba(0, 0, 0, 0.06);
-  --glass-highlight: rgba(255, 255, 255, 0.98);
+  --glass-blur: blur(48px) saturate(2.5); /* Heavier saturation for visibility */
+  --glass-border: rgba(0, 0, 0, 0.12); /* Sharpened */
+  --glass-highlight: rgba(255, 255, 255, 0.99);
 
   --text-main: #020617;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
+  --text-secondary: #334155; /* Darkened for clarity */
+  --text-muted: #576b8a; /* Darkened for clarity */
 
-  --grid-line: rgba(0, 0, 0, 0.05);
+  --grid-line: rgba(0, 0, 0, 0.06);
   --tooltip-bg: rgba(255, 255, 255, 1);
+  --shadow-md: 0 10px 30px rgba(0,0,0,0.06), 0 0 1px rgba(0,0,0,0.1);
 }
 
 h1, h2, h3, h4, .display-font {
@@ -335,12 +337,15 @@ body {
   box-shadow: 0 0 8px rgba(248, 113, 113, 0.06);
 }
 
-/* ═══ Data Tables ═══ */
+/* ═══ Data Tables (Glass Persistence) ═══ */
 .table-wrapper {
   overflow-x: auto;
   border-radius: var(--radius-card);
-  box-shadow: var(--neo-pressed);
-  background: rgba(0, 0, 0, 0.15);
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-sm);
   margin-top: 24px;
 }
 

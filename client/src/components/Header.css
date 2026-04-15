@@ -46,10 +46,13 @@
 }
 
 .breadcrumb .current {
-  color: var(--text-muted);
-  background: rgba(16, 185, 129, 0.08);
-  padding: 2px 8px;
-  border-radius: 4px;
+  color: var(--text-main);
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: 4px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
 }
 
 .header-title {

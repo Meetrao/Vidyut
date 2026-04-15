@@ -110,7 +110,8 @@
 }
 
 .nav-link:hover {
-  background: rgba(16, 185, 129, 0.05);
+  background: var(--bg-card-hover);
+  backdrop-filter: var(--glass-blur);
   color: var(--text-main);
   transform: translateX(4px);
 }
@@ -118,7 +119,7 @@
 .nav-link.active {
   background: var(--emerald-gradient);
   color: white;
-  box-shadow: 0 8px 20px rgba(0, 77, 64, 0.4), var(--glow-emerald);
+  box-shadow: 0 8px 24px rgba(20, 184, 166, 0.2), var(--glow-emerald);
   transform: translateX(6px);
 }
 
