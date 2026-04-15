@@ -73,15 +73,18 @@
   color: white;
   margin: 0;
   font-family: var(--font-display);
+  line-height: 1;
 }
 
 .brand-text span {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--accent-emerald);
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-weight: 700;
+  letter-spacing: 0.18em;
+  font-weight: 800;
   opacity: 0.9;
+  display: block;
+  margin-top: -2px;
 }
 
 /* ─── Navigation ─── */

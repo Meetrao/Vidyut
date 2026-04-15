@@ -606,7 +606,7 @@ h1, h2, h3, h4, .display-font {
 .auth-title {
   font-size: 2.4rem;
   font-weight: 900;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   background: linear-gradient(135deg, #fff 0%, #94a3b8 40%, var(--accent-emerald) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
@@ -615,16 +615,17 @@ h1, h2, h3, h4, .display-font {
   color: transparent;
   margin: 0;
   animation: shimmer 4s linear infinite;
+  line-height: 1;
 }
 
 .auth-subtitle {
   color: var(--accent-emerald);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  margin-top: 6px;
-  opacity: 0.8;
+  margin-top: -4px;
+  opacity: 0.9;
 }
 
 .auth-form {
