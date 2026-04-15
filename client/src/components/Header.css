@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 24px;
+  padding: 24px 32px;
   background: var(--bg-glass);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
@@ -11,6 +11,7 @@
   top: 0;
   z-index: 900;
   border-radius: 0 0 var(--radius-card) var(--radius-card);
+  margin-bottom: 32px;
 }
 
 .header-left {
