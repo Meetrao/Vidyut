@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   flex-wrap: wrap;
   gap: 8px;
 }
@@ -30,8 +30,8 @@
 .rec-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  margin-top: 20px;
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .rec-item {
