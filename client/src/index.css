@@ -1,30 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap');
 
 :root {
-  /* ═══ Royal Obsidian Luxe Palette ═══ */
-  --bg-space: #010204; 
+  /* ═══ Royal Obsidian Mastery Palette ═══ */
+  --bg-space: #010204; /* Velvet Onyx */
   --bg-deep-teal: #020617;
   --bg-surface: transparent;
   --bg-glass: rgba(15, 23, 42, 0.05);
-  --bg-card: rgba(15, 23, 42, 0.08); 
-  --bg-card-hover: rgba(15, 23, 42, 0.15);
+  --bg-card: rgba(15, 23, 42, 0.06); 
+  --bg-card-hover: rgba(15, 23, 42, 0.12);
 
   --emerald-gradient: linear-gradient(135deg, #0d9488 0%, #010204 100%);
   --accent-emerald: #14b8a6;
   --accent-mint: #ccfbf1;
   --accent-cyan: #22d3ee;
 
-  /* Elite Refraction */
-  --glass-blur: blur(64px) saturate(2.2);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-highlight: rgba(255, 255, 255, 0.12);
+  /* Master Refraction */
+  --glass-blur: blur(48px) saturate(2);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.08);
 
   /* Elite Shadow Stacks */
-  --shadow-sm: 0 8px 16px rgba(0,0,0,0.25);
-  --shadow-md: 0 20px 50px rgba(0,0,0,0.4);
-  --shadow-lg: 0 40px 100px rgba(0,0,0,0.6);
+  --shadow-sm: 0 8px 16px rgba(0,0,0,0.2);
+  --shadow-md: 0 20px 40px rgba(0,0,0,0.3);
+  --shadow-lg: 0 40px 80px rgba(0,0,0,0.45);
   
-  --glow-emerald: 0 0 50px rgba(20, 184, 166, 0.15), 0 0 100px rgba(20, 184, 166, 0.08);
+  --glow-emerald: 0 0 40px rgba(20, 184, 166, 0.12), 0 0 80px rgba(20, 184, 166, 0.06);
 
   /* Typography Royal */
   --text-main: #f8fafc;
@@ -33,33 +33,34 @@
   --font-body: 'Inter', system-ui, sans-serif;
   --font-display: 'Outfit', sans-serif;
 
-  /* Constants */
+  /* Constants (De-Cluttered) */
   --radius-card: 32px;
   --sidebar-width: 280px;
-  --transition-elite: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-elite: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   
   --grid-line: rgba(255, 255, 255, 0.03);
   --tooltip-bg: rgba(1, 2, 4, 0.99);
 }
 
-/* ═══ Pearl Silk Luxe Palette ═══ */
+/* ═══ Pearl Silk Mastery Palette ═══ */
 .light-mode {
-  --bg-space: #fdfdfa; /* Warm Pearl */
+  --bg-space: #ffffff;
   --bg-deep-teal: #f8fafc;
-  --bg-glass: rgba(255, 255, 255, 0.2);
-  --bg-card: rgba(255, 255, 255, 0.25);
-  --bg-card-hover: rgba(255, 255, 255, 0.45);
+  --bg-glass: rgba(255, 255, 255, 0.12); /* Increased for clarity */
+  --bg-card: rgba(255, 255, 255, 0.15);
+  --bg-card-hover: rgba(255, 255, 255, 0.3);
 
-  --glass-border: rgba(255, 255, 255, 0.7); /* Shimmering White Luster */
-  --glass-highlight: rgba(255, 255, 255, 1);
+  --glass-blur: blur(48px) saturate(2.5); /* Heavier saturation for visibility */
+  --glass-border: rgba(0, 0, 0, 0.12); /* Sharpened */
+  --glass-highlight: rgba(255, 255, 255, 0.99);
 
   --text-main: #020617;
-  --text-secondary: #334155;
-  --text-muted: #576b8a;
+  --text-secondary: #334155; /* Darkened for clarity */
+  --text-muted: #576b8a; /* Darkened for clarity */
 
-  --grid-line: rgba(0, 0, 0, 0.04);
+  --grid-line: rgba(0, 0, 0, 0.06);
   --tooltip-bg: rgba(255, 255, 255, 1);
-  --shadow-md: 0 20px 40px rgba(0,0,0,0.03), 0 0 1px rgba(0,0,0,0.05);
+  --shadow-md: 0 10px 30px rgba(0,0,0,0.06), 0 0 1px rgba(0,0,0,0.1);
 }
 
 h1, h2, h3, h4, .display-font {
@@ -86,9 +87,9 @@ h1, h2, h3, h4, .display-font {
 body {
   font-family: var(--font-body);
   background:
-    radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.35) 0px, transparent 60%),
-    radial-gradient(at 100% 0%, rgba(34, 211, 238, 0.25) 0px, transparent 60%),
-    radial-gradient(at 50% 100%, rgba(15, 23, 42, 0.4) 0px, transparent 100%);
+    radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(34, 211, 238, 0.08) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.1) 0px, transparent 100%);
   background-color: var(--bg-space);
   color: var(--text-main);
   min-height: 100vh;
@@ -100,9 +101,9 @@ body {
 
 .light-mode body {
   background:
-    radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.2) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.1) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, rgba(255, 255, 255, 0.9) 0px, transparent 100%);
+    radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.05) 0px, transparent 40%),
+    radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.03) 0px, transparent 40%),
+    radial-gradient(at 50% 50%, rgba(255, 255, 255, 0.8) 0px, transparent 100%);
   background-color: var(--bg-space);
 }
 
@@ -277,12 +278,12 @@ body {
   letter-spacing: -0.04em;
   margin-bottom: 8px;
   text-transform: capitalize;
-  background: linear-gradient(135deg, var(--text-main) 0%, var(--accent-emerald) 50%, var(--accent-cyan) 100%);
+  background: linear-gradient(135deg, var(--text-main) 0%, var(--accent-emerald) 60%, var(--accent-cyan) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1.05;
-  filter: drop-shadow(0 8px 24px rgba(20, 184, 166, 0.2));
+  filter: drop-shadow(0 8px 16px rgba(20, 184, 166, 0.15));
 }
 
 .brand-name {
@@ -299,8 +300,8 @@ body {
 }
 
 .light-mode .page-title {
-  background: linear-gradient(135deg, #020617 0%, #0d9488 50%, #0f766e 100%);
-  filter: drop-shadow(0 8px 16px rgba(13, 148, 136, 0.1));
+  background: linear-gradient(135deg, var(--text-main) 0%, #0d9488 60%, #0891b2 100%);
+  filter: none;
 }
 
 .page-subtitle {
@@ -652,7 +653,7 @@ body {
   font-size: 2.4rem;
   font-weight: 900;
   letter-spacing: 0.22em;
-  background: linear-gradient(135deg, var(--text-main) 0%, var(--accent-emerald) 50%, var(--accent-cyan) 100%);
+  background: linear-gradient(135deg, var(--text-main) 0%, var(--text-secondary) 40%, var(--accent-emerald) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -664,7 +665,7 @@ body {
 }
 
 .light-mode .auth-title {
-  background: linear-gradient(135deg, #020617 0%, #0d9488 50%, #0f766e 100%);
+  background: linear-gradient(135deg, #020617 0%, #0d9488 40%, #0f766e 100%);
 }
 
 .auth-subtitle {
