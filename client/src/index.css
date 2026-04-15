@@ -1,103 +1,107 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap');
 
 :root {
-  /* ═══ Deep Teal / Emerald / Cyan Palette ═══ */
-  --bg-space: #011616;
-  --bg-deep-teal: #002b2b;
-  --bg-surface: #012020;
-  --bg-card: rgba(240, 248, 245, 0.045);
-  --bg-card-hover: rgba(240, 248, 245, 0.065);
+  /* ═══ Sapphire Obsidian Luxe Palette ═══ */
+  --bg-space: #020617; /* Deepest Indigo-Black */
+  --bg-deep-teal: #0f172a;
+  --bg-surface: #030712;
+  --bg-card: rgba(15, 23, 42, 0.45);
+  --bg-card-hover: rgba(15, 23, 42, 0.65);
 
-  --emerald-gradient: linear-gradient(135deg, #004d40 0%, #00695c 50%, #002b2b 100%);
-  --emerald-glow: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  --accent-emerald: #10b981;
-  --accent-mint: #d1fae5;
-  --accent-aqua: #a7f3d0;
-  --accent-cyan: #06b6d4;
+  --emerald-gradient: linear-gradient(135deg, #0d9488 0%, #0f172a 100%);
+  --emerald-glow: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  --accent-emerald: #14b8a6;
+  --accent-mint: #ccfbf1;
+  --accent-aqua: #99f6e4;
+  --accent-cyan: #22d3ee;
 
-  /* Glass layers */
-  --glass-white: rgba(255, 255, 255, 0.04);
-  --glass-mint: rgba(161, 253, 208, 0.06);
-  --glass-teal: rgba(0, 77, 64, 0.15);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-hover: rgba(255, 255, 255, 0.14);
-  --glass-highlight: rgba(255, 255, 255, 0.06);
+  /* Refractive Glass layers */
+  --glass-white: rgba(255, 255, 255, 0.03);
+  --glass-mint: rgba(20, 184, 166, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --glass-border-hover: rgba(255, 255, 255, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.05);
 
-  /* ═══ Ambient Shadow System (Multi-layered Depth) ═══ */
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25), 0 0 1px rgba(16, 185, 129, 0.1);
-  --shadow-md: 0 10px 24px rgba(0, 0, 0, 0.45), 0 0 1px rgba(16, 185, 129, 0.2);
-  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.55), 0 0 1px rgba(16, 185, 129, 0.3);
+  /* ═══ Elite Shadow Stacks (6-Layer Physics) ═══ */
+  --shadow-sm: 
+    0 2px 4px rgba(0,0,0,0.1),
+    0 4px 8px rgba(0,0,0,0.1),
+    0 8px 16px rgba(0,0,0,0.1);
+  --shadow-md: 
+    0 4px 6px rgba(0,0,0,0.1),
+    0 12px 24px rgba(0,0,0,0.15),
+    0 24px 48px rgba(0,0,0,0.2);
+  --shadow-lg: 
+    0 10px 15px rgba(0,0,0,0.1),
+    0 25px 50px rgba(0,0,0,0.25),
+    0 50px 100px rgba(0,0,0,0.35);
   
-  --neo-raised: 8px 8px 20px rgba(0, 0, 0, 0.4), -8px -8px 20px rgba(167, 243, 208, 0.03);
-  --neo-raised-lg: 12px 12px 30px rgba(0, 0, 0, 0.5), -12px -12px 30px rgba(167, 243, 208, 0.05);
-  --neo-pressed: inset 4px 4px 10px rgba(0, 0, 0, 0.5), inset -4px -4px 10px rgba(161, 253, 208, 0.02);
+  --neo-raised: 
+    8px 8px 16px rgba(0,0,0,0.4), 
+    -4px -4px 12px rgba(255,255,255,0.01);
+  --neo-pressed: 
+    inset 4px 4px 8px rgba(0,0,0,0.5), 
+    inset -2px -2px 6px rgba(255,255,255,0.01);
 
-  /* Ambient Glows */
-  --glow-emerald: 0 0 24px rgba(16, 185, 129, 0.25), 0 10px 30px rgba(16, 185, 129, 0.1);
-  --glow-cyan: 0 0 20px rgba(6, 182, 212, 0.18);
-  --glow-red: 0 0 24px rgba(248, 113, 113, 0.2);
+  /* Elite Glows */
+  --glow-emerald: 0 0 40px rgba(20, 184, 166, 0.15), 0 0 80px rgba(20, 184, 166, 0.1);
+  --glow-cyan: 0 0 30px rgba(34, 211, 238, 0.12);
 
-  /* Typography */
-  --text-main: #f0fdf4;
-  --text-secondary: #cbd5e1;
-  --text-muted: #64748b;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Typography Luxe */
+  --text-main: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #475569;
+  --font-body: 'Inter', system-ui, sans-serif;
   --font-display: 'Outfit', sans-serif;
 
-  /* Radii */
-  --radius-pill: 50px;
-  --radius-card: 24px;
+  /* Constants */
+  --radius-card: 28px;
   --radius-lg: 20px;
-  --radius-md: 16px;
-  --radius-sm: 12px;
-
-  /* Layout */
+  --radius-pill: 60px;
   --sidebar-width: 270px;
-  --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-
-  /* Semantic Chart Extensions */
-  --grid-line: rgba(255, 255, 255, 0.05);
-  --tooltip-bg: rgba(1, 22, 22, 0.95);
+  --transition-elite: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  --grid-line: rgba(255, 255, 255, 0.03);
+  --tooltip-bg: rgba(2, 6, 23, 0.98);
 }
 
-/* ═══ Light Mode Overrides ═══ */
+/* ═══ Alabaster Pearl Luxe Overrides ═══ */
 .light-mode {
-  --bg-space: #f8fafc;
-  --bg-deep-teal: #f1f5f9;
+  --bg-space: #fcfcf9; /* Warm Pearl */
+  --bg-deep-teal: #f5f5f0;
   --bg-surface: #ffffff;
-  --bg-card: rgba(255, 255, 255, 0.7);
-  --bg-card-hover: rgba(255, 255, 255, 0.9);
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
 
-  --emerald-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  --accent-mint: #064e3b;
+  --emerald-gradient: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+  --accent-mint: #042f2e;
   --accent-aqua: #0f766e;
 
   /* Glass layers */
-  --glass-white: rgba(0, 0, 0, 0.03);
-  --glass-mint: rgba(16, 185, 129, 0.05);
-  --glass-teal: rgba(16, 185, 129, 0.08);
-  --glass-border: rgba(0, 0, 0, 0.1);
-  --glass-border-hover: rgba(0, 0, 0, 0.18);
-  --glass-highlight: rgba(255, 255, 255, 0.8);
+  --glass-white: rgba(0, 0, 0, 0.01);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --glass-border-hover: rgba(0, 0, 0, 0.1);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
 
-  /* Shadow system (Softer for Light Mode) */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.12);
+  /* Elite Shadow Stacks (Soft Alabaster) */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.02), 0 4px 8px rgba(0,0,0,0.02);
+  --shadow-md: 
+    0 10px 20px rgba(0,0,0,0.04), 
+    0 20px 40px rgba(0,0,0,0.03);
+  --shadow-lg: 
+    0 30px 60px rgba(0,0,0,0.06), 
+    0 60px 120px rgba(0,0,0,0.04);
   
-  --neo-raised: 6px 6px 12px rgba(0, 0, 0, 0.05), -6px -6px 12px rgba(255, 255, 255, 0.8);
-  --neo-pressed: inset 2px 2px 6px rgba(0, 0, 0, 0.05), inset -2px -2px 6px rgba(255, 255, 255, 0.8);
+  --neo-raised: 8px 8px 24px rgba(0,0,0,0.03), -8px -8px 24px #fff;
+  --neo-pressed: inset 4px 4px 12px rgba(0,0,0,0.02), inset -4px -4px 12px #fff;
 
-  /* Typography */
-  --text-main: #0f172a;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
+  /* Typography Luxe */
+  --text-main: #020617;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
 
-  /* Semantic Chart Extensions */
-  --grid-line: rgba(0, 0, 0, 0.05);
-  --tooltip-bg: rgba(255, 255, 255, 0.98);
+  --grid-line: rgba(0, 0, 0, 0.04);
+  --tooltip-bg: rgba(255, 255, 255, 0.99);
 }
 
 /* ═══ Reset ═══ */
@@ -132,16 +136,40 @@ h1, h2, h3, h4, .display-font {
   font-family: var(--font-display);
 }
 
-/* ═══ App Layout ═══ */
+/* ═══ App Layout (Atmospheric Mesh Engine) ═══ */
 .app-layout {
   display: flex;
   min-height: 100vh;
   background:
-    radial-gradient(circle at 10% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
-    radial-gradient(circle at 50% 50%, rgba(1, 43, 43, 0.4) 0%, transparent 100%);
+    radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(34, 211, 238, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(20, 184, 166, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(15, 23, 42, 0.2) 0px, transparent 50%);
   background-color: var(--bg-space);
   background-attachment: fixed;
+  position: relative;
+}
+
+/* Organic Noise Texture Overlay */
+.app-layout::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.02;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 0;
+}
+
+.light-mode .app-layout {
+  background:
+    radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.08) 0px, transparent 40%),
+    radial-gradient(at 100% 0%, rgba(245, 158, 11, 0.05) 0px, transparent 40%),
+    radial-gradient(at 50% 50%, rgba(255, 255, 255, 0.8) 0px, transparent 100%);
+  background-color: var(--bg-space);
 }
 
 .main-content {
@@ -153,89 +181,69 @@ h1, h2, h3, h4, .display-font {
   width: 100%;
 }
 
-/* ═══ Glassmorphic Card Base ═══ */
+/* ═══ Refractive Glassmorphic Card ═══ */
 .card {
   background: var(--bg-card);
-  backdrop-filter: blur(28px) saturate(1.4);
-  -webkit-backdrop-filter: blur(28px) saturate(1.4);
+  backdrop-filter: blur(32px) saturate(1.8);
+  -webkit-backdrop-filter: blur(32px) saturate(1.8);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-card);
-  padding: 18px;
-  box-shadow: var(--shadow-md);
-  transition: var(--transition-spring);
+  padding: 22px;
+  box-shadow: 
+    var(--shadow-md), 
+    inset 0 0 0 1px var(--glass-highlight);
+  transition: var(--transition-elite);
   position: relative;
   overflow: hidden;
 }
 
-/* Atmospheric Light Sweep */
-.card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.03),
-    rgba(255, 255, 255, 0.08),
-    rgba(255, 255, 255, 0.03),
-    transparent
-  );
-  transform: skewX(-20deg);
-  animation: cardSweep 8s infinite ease-in-out;
-  pointer-events: none;
-}
-
-@keyframes cardSweep {
-  0% { left: -150%; }
-  20% { left: 150%; }
-  100% { left: 150%; }
-}
-
 .card:hover {
-  transform: translateY(-6px) scale(1.01);
+  transform: translateY(-8px) scale(1.005);
   border-color: var(--glass-border-hover);
-  box-shadow: var(--shadow-lg), var(--glow-emerald);
+  box-shadow: 
+    var(--shadow-lg), 
+    var(--glow-emerald),
+    inset 0 0 0 1px var(--glass-highlight);
   background: var(--bg-card-hover);
 }
 
 /* ═══ Neumorphic Buttons (Pill-Shaped) ═══ */
 .btn {
-  padding: 10px 24px;
+  padding: 12px 28px;
   border-radius: var(--radius-pill);
-  border: none;
-  font-weight: 600;
+  border: 1px solid var(--glass-border);
+  font-weight: 700;
   cursor: pointer;
-  transition: var(--transition);
+  transition: var(--transition-elite);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   text-decoration: none;
-  font-size: 0.88rem;
-  letter-spacing: 0.02em;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
   position: relative;
   font-family: var(--font-body);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-primary {
   background: var(--emerald-gradient);
   background-size: 200% auto;
   color: white;
-  box-shadow: 0 10px 20px rgba(0, 77, 64, 0.3), var(--glow-emerald);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(20, 184, 166, 0.2), var(--glow-emerald);
 }
 
 .btn-primary:hover {
   background-position: right center;
-  box-shadow: 0 15px 30px rgba(0, 77, 64, 0.4), var(--glow-emerald);
+  box-shadow: 0 12px 32px rgba(20, 184, 166, 0.3), var(--glow-emerald);
   transform: translateY(-4px) scale(1.02);
 }
 
 .btn-primary:active {
   box-shadow: var(--neo-pressed);
-  transform: translateY(0) scale(0.96);
+  transform: translateY(0) scale(0.98);
 }
 
 .btn-ghost {
@@ -269,38 +277,41 @@ h1, h2, h3, h4, .display-font {
 
 .form-input, .form-select {
   width: 100%;
-  padding: 10px 16px;
-  background: rgba(0, 0, 0, 0.25);
+  padding: 12px 18px;
+  background: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
   color: var(--text-main);
-  box-shadow: var(--neo-pressed);
-  transition: var(--transition);
+  box-shadow: var(--neo-pressed), inset 0 0 0 1px rgba(255,255,255,0.02);
+  transition: var(--transition-elite);
   outline: none;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-family: var(--font-body);
 }
 
-.form-input::placeholder { color: var(--text-muted); opacity: 0.6; }
+.light-mode .form-input {
+  background: #ffffff;
+}
+
 .form-input:focus, .form-select:focus {
   border-color: var(--accent-emerald);
-  background: rgba(0, 0, 0, 0.35);
-  box-shadow: var(--neo-pressed), 0 0 12px rgba(16, 185, 129, 0.12);
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: var(--neo-pressed), 0 0 20px rgba(20, 184, 166, 0.1);
 }
 
 /* ═══ Typography Hierarchy ═══ */
 .page-title {
-  font-size: 2.8rem;
+  font-size: 3.2rem;
   font-weight: 900;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.04em;
   margin-bottom: 8px;
   text-transform: capitalize;
   background: linear-gradient(135deg, #fff 0%, var(--accent-emerald) 60%, var(--accent-aqua) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  line-height: 1.1;
-  filter: drop-shadow(0 4px 12px rgba(16, 185, 129, 0.2));
+  line-height: 1.05;
+  filter: drop-shadow(0 8px 16px rgba(20, 184, 166, 0.25));
 }
 
 .page-subtitle {
