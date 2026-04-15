@@ -1,7 +1,7 @@
 /* ─── Dashboard Page ─── */
 
 .chart-card {
-  padding: 36px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   background: var(--bg-surface);
@@ -9,23 +9,23 @@
 }
 
 .chart-title {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 24px;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
 }
 
 /* Anomaly Banner */
 .anomaly-banner {
   background: rgba(251, 191, 36, 0.08);
   border: 1px solid rgba(251, 191, 36, 0.25);
-  margin-bottom: 36px;
+  margin-bottom: 24px;
   display: flex;
   align-items: center;
-  gap: 20px;
-  padding: 24px 32px;
+  gap: 16px;
+  padding: 18px 24px;
   box-shadow: var(--shadow-sm), var(--glow-amber);
   border-radius: var(--radius-lg);
 }

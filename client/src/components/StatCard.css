@@ -3,10 +3,10 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  min-height: 180px;
+  gap: 12px;
+  min-height: 140px;
   justify-content: center;
-  padding: 36px !important;
+  padding: 24px !important;
 }
 
 /* Floating ambient gradient blob enhanced for beauty */
@@ -57,7 +57,7 @@
 .stat-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
 }
 
 .stat-label {
