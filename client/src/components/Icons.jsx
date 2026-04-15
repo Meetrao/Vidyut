@@ -172,3 +172,37 @@ export const Moon = (props) => (
     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
   </IconBase>
 );
+
+export const Activity = (props) => (
+  <IconBase {...props}>
+    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+  </IconBase>
+);
+
+export const Database = (props) => (
+  <IconBase {...props}>
+    <ellipse cx="12" cy="5" rx="9" ry="3" />
+    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+  </IconBase>
+);
+
+export const Shield = (props) => (
+  <IconBase {...props}>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+  </IconBase>
+);
+
+export const Power = (props) => (
+  <IconBase {...props}>
+    <path d="M18.36 6.64a9 9 0 1 1-12.73 0" />
+    <line x1="12" y1="2" x2="12" y2="12" />
+  </IconBase>
+);
+
+export const ArrowRight = (props) => (
+  <IconBase {...props}>
+    <line x1="5" y1="12" x2="19" y2="12" />
+    <polyline points="12 5 19 12 12 19" />
+  </IconBase>
+);

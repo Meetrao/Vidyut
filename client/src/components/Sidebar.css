@@ -124,10 +124,17 @@
 }
 
 .nav-icon {
-  font-size: 1.15rem;
-  opacity: 0.85;
   width: 28px;
-  text-align: center;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+}
+
+.nav-link.active .nav-icon svg,
+.nav-link:hover .nav-icon svg {
+  opacity: 1;
 }
 
 .nav-label {
@@ -139,7 +146,9 @@
   opacity: 0;
   transform: translateX(-8px);
   transition: var(--transition-spring);
-  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--accent-emerald);
 }
 
@@ -217,9 +226,8 @@
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--glass-border);
   color: var(--text-muted);
-  font-size: 1.1rem;
   cursor: pointer;
-  transition: var(--transition);
+  transition: var(--transition-elite);
   padding: 8px;
   border-radius: 50%;
   width: 36px;

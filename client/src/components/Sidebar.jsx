@@ -1,14 +1,15 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Logo from './Logo';
+import { Zap, Cloud, Activity, Database, Bell, Shield, Power, ArrowRight } from './Icons';
 import './Sidebar.css';
 
 const NAV_ITEMS = [
-  { path: '/', icon: '⚡', label: 'Dashboard' },
-  { path: '/upload', icon: '☁️', label: 'Upload CSV' },
-  { path: '/analytics', icon: '🔬', label: 'Analytics' },
-  { path: '/history', icon: '📋', label: 'History' },
-  { path: '/alerts', icon: '🔔', label: 'Alerts' },
+  { path: '/', icon: <Zap size={20} />, label: 'Dashboard' },
+  { path: '/upload', icon: <Cloud size={20} />, label: 'Upload CSV' },
+  { path: '/analytics', icon: <Activity size={20} />, label: 'Analytics' },
+  { path: '/history', icon: <Database size={20} />, label: 'History' },
+  { path: '/alerts', icon: <Bell size={20} />, label: 'Alerts' },
 ];
 
 export default function Sidebar() {
@@ -39,7 +40,7 @@ export default function Sidebar() {
           >
             <span className="nav-icon">{item.icon}</span>
             <span className="nav-label">{item.label}</span>
-            <span className="nav-arrow">→</span>
+            <span className="nav-arrow"><ArrowRight size={16} /></span>
           </NavLink>
         ))}
 
@@ -48,9 +49,9 @@ export default function Sidebar() {
             to="/admin"
             className={({ isActive }) => `nav-link admin-link ${isActive ? 'active' : ''}`}
           >
-            <span className="nav-icon">🛡️</span>
+            <span className="nav-icon"><Shield size={20} /></span>
             <span className="nav-label">Admin Panel</span>
-            <span className="nav-arrow">→</span>
+            <span className="nav-arrow"><ArrowRight size={16} /></span>
           </NavLink>
         )}
       </nav>
@@ -66,7 +67,7 @@ export default function Sidebar() {
               <span className={`role-badge ${user.role}`}>{user.role}</span>
             </div>
             <button className="logout-btn" onClick={handleLogout} title="Logout">
-              ⏻
+              <Power size={20} />
             </button>
           </div>
         </div>
