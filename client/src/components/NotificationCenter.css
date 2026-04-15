@@ -65,12 +65,12 @@
   top: calc(100% + 24px);
   right: -10px;
   width: 380px;
-  background: rgba(1, 32, 32, 0.98);
-  backdrop-filter: blur(40px) saturate(1.8);
-  -webkit-backdrop-filter: blur(40px) saturate(1.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
   border-radius: 24px;
-  box-shadow: var(--shadow-lg), 0 30px 60px rgba(0,0,0,0.6);
+  box-shadow: var(--shadow-lg), 0 30px 60px rgba(0,0,0,0.2);
   z-index: 1000;
   overflow: hidden;
   transform-origin: top right;
@@ -91,7 +91,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .header-meta h3 {
@@ -113,7 +113,7 @@
 
 .unread-pill {
   background: var(--accent-emerald);
-  color: #012020;
+  color: white;
   font-size: 0.65rem;
   font-weight: 800;
   padding: 4px 10px;
@@ -139,11 +139,12 @@
 }
 
 .n-card:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-card-hover);
 }
 
 .n-card.unread {
-  background: rgba(16, 185, 129, 0.03);
+  background: var(--glass-teal);
+  opacity: 1;
 }
 
 .n-indicator {
@@ -229,7 +230,7 @@
 
 .dropdown-footer {
   padding: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--glass-border);
   display: flex;
   justify-content: center;
 }
