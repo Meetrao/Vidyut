@@ -28,7 +28,6 @@ export default function Header() {
           <Logo size={20} className="header-brand-logo" />
           <span className="root">VIDYUT</span>
           <span className="separator">/</span>
-          <span className="current">{getPageTitle()}</span>
         </div>
         <div className="header-title-row">
           <h2 className="header-title">{getPageTitle()}</h2>

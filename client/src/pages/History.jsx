@@ -57,15 +57,11 @@ export default function History() {
 
   return (
     <div className="animate-fade">
-      <header className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 24 }}>
-        <div>
-          <h1 className="page-title">Usage History</h1>
-          <p className="page-subtitle">Historical records of your power consumption.</p>
-        </div>
-        <button className="btn btn-primary" onClick={handleExport} style={{ alignSelf: 'center' }}>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 20 }}>
+        <button className="btn btn-primary" onClick={handleExport}>
           📤 Export CSV
         </button>
-      </header>
+      </div>
 
       <div className="card filter-card animate-fade" style={{ marginBottom: 32, display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
         <div className="filter-group">
