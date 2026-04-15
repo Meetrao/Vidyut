@@ -11,32 +11,37 @@
 }
 
 .card-title {
-  font-size: var(--fs-xl);
-  font-weight: 700;
+  font-size: 1.4rem;
+  font-weight: 900;
   color: var(--text-main);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  font-family: var(--font-display);
 }
 
 .card-desc {
-  font-size: var(--fs-sm);
+  font-size: 0.88rem;
   color: var(--text-secondary);
+  opacity: 0.6;
 }
 
 /* Dropzone — Deep Neumorphic Recess */
 .dropzone {
-  border: 2px dashed rgba(16, 185, 129, 0.2);
-  border-radius: var(--radius-lg);
-  padding: 48px 24px;
+  border: 2px dashed rgba(16, 185, 129, 0.15);
+  border-radius: var(--radius-card);
+  padding: 60px 24px;
   text-align: center;
-  background: rgba(15, 23, 42, 0.3);
-  transition: var(--transition);
+  background: rgba(0, 0, 0, 0.2);
+  transition: var(--transition-spring);
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  color: var(--text-secondary);
-  font-size: var(--fs-sm);
+  justify-content: center;
+  gap: 20px;
+  box-shadow: var(--neo-pressed);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
 }
 
 .dropzone:hover {
@@ -47,7 +52,8 @@
 .dropzone.dragging {
   border-color: var(--accent-emerald);
   background: rgba(16, 185, 129, 0.04);
-  transform: scale(1.02);
+  box-shadow: var(--neo-pressed), 0 0 24px rgba(16, 185, 129, 0.08);
+  transform: scale(1.01);
 }
 
 .dropzone-icon {
@@ -76,9 +82,11 @@
 
 /* ─── Summary Card ─── */
 .summary-card {
-  background: rgba(16, 185, 129, 0.04);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-  padding: 24px;
+  background: rgba(16, 185, 129, 0.08);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 32px;
+  box-shadow: var(--glow-emerald);
 }
 
 .summary-header {
@@ -107,15 +115,15 @@
 }
 
 .summary-stat .label {
-  font-size: var(--fs-xs);
+  font-size: 0.75rem;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   margin-bottom: 4px;
 }
 
 .summary-stat .value {
-  font-size: var(--fs-2xl);
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--text-main);
 }

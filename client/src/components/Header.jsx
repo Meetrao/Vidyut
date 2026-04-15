@@ -41,8 +41,11 @@ export default function Header() {
             <span>Welcome back,</span>
             <p>{user?.name}</p>
           </div>
-          <div className="header-avatar">
-            {user?.name?.charAt(0).toUpperCase()}
+          <div className="header-avatar-group">
+            <div className="header-avatar">
+              {user?.name?.charAt(0).toUpperCase()}
+            </div>
+            <div className="status-indicator"></div>
           </div>
         </div>
       </div>
