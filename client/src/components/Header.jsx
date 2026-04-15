@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import NotificationCenter from './NotificationCenter';
+import ThemeToggle from './ThemeToggle';
 import Logo from './Logo';
 import './Header.css';
 

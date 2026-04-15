@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Loader from './components/Loader';
 import Header from './components/Header';
+import { ThemeProvider } from './context/ThemeContext';
 import './index.css';
 
 // Protected layout: redirects to /login if not authenticated
