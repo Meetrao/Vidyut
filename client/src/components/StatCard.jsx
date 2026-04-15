@@ -1,4 +1,5 @@
 import React from 'react';
+import { ArrowUpRight, ArrowDownRight } from './Icons';
 import './StatCard.css';
 
 export default function StatCard({ label, value, icon, variant, trend, trendDir }) {
@@ -10,7 +11,7 @@ export default function StatCard({ label, value, icon, variant, trend, trendDir 
         <h2 className="stat-value">{value}</h2>
         {trend && (
           <span className={`stat-trend ${trendDir === 'up' ? 'up' : 'down'}`}>
-            {trendDir === 'up' ? '↗' : '↘'} {trend}
+            {trendDir === 'up' ? <ArrowUpRight size={14} /> : <ArrowDownRight size={14} />} {trend}
           </span>
         )}
       </div>

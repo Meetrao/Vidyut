@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useToast } from '../components/Toast';
 import { uploadCSV, addUsage } from '../services/api';
 import { Link } from 'react-router-dom';
+import { Export, Cloud, Zap, BarChart, AlertCircle, Sparkles } from '../components/Icons';
 import './Upload.css';
 
 export default function Upload() {
@@ -70,7 +71,9 @@ export default function Upload() {
       {summary && (
         <div className="card summary-card animate-slide-down" style={{ marginBottom: 32 }}>
           <div className="summary-header">
-            <h3 className="summary-title">📈 Intelligence Summary</h3>
+            <h3 className="summary-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <BarChart size={20} /> Intelligence Summary
+            </h3>
             <button className="btn-close" onClick={() => setSummary(null)}>×</button>
           </div>
           <div className="summary-content">
@@ -111,7 +114,7 @@ export default function Upload() {
             onDragLeave={() => setIsDragging(false)}
             onDrop={handleDrop}
           >
-            <div className="dropzone-icon">☁️</div>
+            <div className="dropzone-icon"><Cloud size={48} /></div>
             <p>{file ? `Selected: ${file.name}` : 'Drop CSV file or click to browse'}</p>
             <input
               type="file"
@@ -127,11 +130,11 @@ export default function Upload() {
 
           <button
             className="btn btn-primary"
-            style={{ width: '100%', marginTop: 24 }}
+            style={{ width: '100%', marginTop: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}
             onClick={handleUpload}
             disabled={!file || loading}
           >
-            {loading ? 'Processing...' : '⚡ Sync to Cloud'}
+            {loading ? 'Processing...' : <><Zap size={18} /> Sync to Cloud</>}
           </button>
         </div>
 

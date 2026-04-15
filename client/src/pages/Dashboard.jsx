@@ -9,6 +9,7 @@ import { Line, Bar } from 'react-chartjs-2';
 import StatCard from '../components/StatCard';
 import Loader from '../components/Loader';
 import { getStats } from '../services/api';
+import { Zap, Coins, BarChart, AlertTriangle, AlertCircle } from '../components/Icons';
 import './Dashboard.css';
 
 ChartJS.register(
@@ -98,7 +99,9 @@ export default function Dashboard() {
 
   return (
     <div className="animate-fade">
-      {error && <div className="card" style={{ color: '#fca5a5', marginBottom: 32, border: '1px solid rgba(248,113,113,0.2)' }}>⚠️ {error}</div>}
+      {error && <div className="card" style={{ color: '#fca5a5', marginBottom: 32, border: '1px solid rgba(248,113,113,0.2)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <AlertTriangle size={18} /> {error}
+      </div>}
 
       {stats?.anomalyCount > 0 && (
         <div className="card anomaly-banner">
@@ -114,25 +117,25 @@ export default function Dashboard() {
         <StatCard 
           label="Total Consumption" 
           value={`${stats?.totalUnits.toLocaleString('en-IN', { maximumFractionDigits: 1 })} kWh`} 
-          icon="⚡" 
+          icon={<Zap size={24} />} 
           variant="emerald"
         />
         <StatCard 
           label="Estimated Cost" 
           value={`₹${stats?.totalCost.toLocaleString('en-IN', { maximumFractionDigits: 0 })}`} 
-          icon="💰" 
+          icon={<Coins size={24} />} 
           variant="green"
         />
         <StatCard 
           label="Avg. Monthly Units" 
           value={`${stats?.avgUnits.toLocaleString('en-IN', { maximumFractionDigits: 1 })} kWh`} 
-          icon="📊" 
+          icon={<BarChart size={24} />} 
           variant="blue"
         />
         <StatCard 
           label="Total Anomalies" 
           value={stats?.anomalyCount || 0} 
-          icon="🔴" 
+          icon={<AlertCircle size={24} />} 
           variant="red"
           trend={stats?.anomalyCount > 0 ? "Review Needed" : "System Healthy"}
           trendDir={stats?.anomalyCount > 0 ? "up" : "down"}
@@ -157,7 +160,7 @@ export default function Dashboard() {
       ) : (
         <div className="card">
           <div className="empty-state">
-            <div className="empty-state-icon">📊</div>
+            <div className="empty-state-icon"><BarChart size={48} /></div>
             <div className="empty-state-text">No data available for the selected period.</div>
             <div className="empty-state-sub">Please upload a CSV file or check your filters.</div>
           </div>

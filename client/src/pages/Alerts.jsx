@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { getAlerts, createAlert, deleteAlert } from '../services/api';
 import { useToast } from '../components/Toast';
 import Loader from '../components/Loader';
+import { Zap, Radio, Coins, BarChart, Trash, Bell } from '../components/Icons';
 import './Alerts.css';
 
 export default function Alerts() {
@@ -85,16 +86,18 @@ export default function Alerts() {
                 <button
                   type="button"
                   className={`btn ${form.type === 'cost' ? 'btn-primary' : 'btn-ghost'}`}
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
                   onClick={() => setForm({ ...form, type: 'cost' })}
                 >
-                  ₹ Currency
+                  <Coins size={16} /> Currency
                 </button>
                 <button
                   type="button"
                   className={`btn ${form.type === 'units' ? 'btn-primary' : 'btn-ghost'}`}
+                  style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
                   onClick={() => setForm({ ...form, type: 'units' })}
                 >
-                  ⚡ Units
+                  <Zap size={16} /> Units
                 </button>
               </div>
             </div>
@@ -111,8 +114,8 @@ export default function Alerts() {
               />
             </div>
 
-            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: 8 }} disabled={submitting}>
-              {submitting ? 'Activating...' : '📡 Activate Alert'}
+            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: 8, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }} disabled={submitting}>
+              {submitting ? 'Activating...' : <><Radio size={18} /> Activate Alert</>}
             </button>
           </form>
         </div>
@@ -131,18 +134,18 @@ export default function Alerts() {
               alerts.map((a) => (
                 <div key={a._id} className="alert-item card">
                   <div className="alert-item-icon">
-                    {a.type === 'cost' ? '💰' : '📊'}
+                    {a.type === 'cost' ? <Coins size={20} /> : <BarChart size={20} />}
                   </div>
                   <div className="alert-item-content">
                     <h4>{a.name}</h4>
                     <p>Trigger: {a.type === 'cost' ? '₹' : ''}{a.threshold} {a.type === 'units' ? 'kWh' : ''}</p>
                   </div>
-                  <button className="btn-icon" onClick={() => handleDelete(a._id)}>🗑️</button>
+                  <button className="btn-icon" onClick={() => handleDelete(a._id)}><Trash size={18} /></button>
                 </div>
               ))
             ) : (
               <div className="empty-state">
-                <div className="empty-state-icon">🔔</div>
+                <div className="empty-state-icon"><Bell size={32} /></div>
                 <p>No alerts configured yet.</p>
               </div>
             )}

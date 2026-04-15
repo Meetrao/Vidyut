@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getNotifications, markNotificationRead } from '../services/api';
+import { Bell, AlertCircle, Radio, Lightbulb, Sparkles } from './Icons';
 import './NotificationCenter.css';
 
 export default function NotificationCenter() {
@@ -57,7 +58,9 @@ export default function NotificationCenter() {
         onClick={handleToggle}
         aria-label="Toggle notifications"
       >
-        <span className="bell-icon">🔔</span>
+        <div className="bell-icon-wrapper">
+          <Bell size={22} />
+        </div>
         {unreadCount > 0 && <span className="notification-dot"></span>}
       </button>
 
@@ -82,7 +85,7 @@ export default function NotificationCenter() {
                 >
                   <div className="n-indicator"></div>
                   <div className="n-icon">
-                    {n.type === 'anomaly' ? '🚨' : n.type === 'sentinel_breach' ? '📡' : '💡'}
+                    {n.type === 'anomaly' ? <AlertCircle size={18} /> : n.type === 'sentinel_breach' ? <Radio size={18} /> : <Lightbulb size={18} />}
                   </div>
                   <div className="n-content">
                     <div className="n-top">
@@ -95,7 +98,9 @@ export default function NotificationCenter() {
               ))
             ) : (
               <div className="n-empty">
-                <div className="n-empty-icon">✨</div>
+                <div className="n-empty-icon">
+                  <Sparkles size={32} />
+                </div>
                 <p>System is healthy.</p>
                 <span>All anomalies processed.</span>
               </div>

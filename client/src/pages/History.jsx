@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { getUsage, deleteUsage, exportUsage } from '../services/api';
 import { useToast } from '../components/Toast';
 import Loader from '../components/Loader';
+import { Export, Trash } from '../components/Icons';
 import './History.css';
 
 export default function History() {
@@ -58,8 +59,8 @@ export default function History() {
   return (
     <div className="animate-fade">
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 20 }}>
-        <button className="btn btn-primary" onClick={handleExport}>
-          📤 Export CSV
+        <button className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }} onClick={handleExport}>
+          <Export size={18} /> Export CSV
         </button>
       </div>
 
@@ -117,7 +118,7 @@ export default function History() {
                     {!u.anomaly && !u.peakHour && <span className="badge" style={{ opacity: 0.5 }}>Standard</span>}
                   </td>
                   <td>
-                    <button className="btn-icon" onClick={() => handleDelete(u._id)} title="Delete record">🗑️</button>
+                    <button className="btn-icon" onClick={() => handleDelete(u._id)} title="Delete record"><Trash size={18} /></button>
                   </td>
                 </tr>
               ))

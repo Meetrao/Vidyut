@@ -7,6 +7,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { getAnomalies, getRecommendations, getDaily } from '../services/api';
 import Loader from '../components/Loader';
+import { AlertCircle, Lightbulb, BarChart, Radio, Timer, Brain, Sparkles } from '../components/Icons';
 import './Analytics.css';
 
 ChartJS.register(
@@ -104,7 +105,9 @@ export default function Analytics() {
         {/* Anomaly Records */}
         <div className="card section-card">
           <div className="section-header">
-            <h3 className="section-title">🔴 Flagged Readings</h3>
+            <h3 className="section-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <AlertCircle size={20} /> Flagged Readings
+            </h3>
             <span className="badge badge-red">{anomalies.length} Detected</span>
           </div>
           
@@ -141,8 +144,10 @@ export default function Analytics() {
         {/* AI Recommendations */}
         <div className="card section-card recommendations-panel">
           <div className="section-header">
-            <h3 className="section-title">💡 Smart Initiatives</h3>
-            <p className="section-desc">Personalized tips to lower your BESCOM/Grid bills.</p>
+            <h3 className="section-title" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Lightbulb size={20} /> Smart Initiatives
+            </h3>
+            <p className="section-desc">Personalized tips to lower your bills.</p>
           </div>
 
           <div className="rec-list">
@@ -150,7 +155,7 @@ export default function Analytics() {
               recommendations.map((rec, i) => (
                 <div key={i} className="rec-item">
                   <div className="rec-icon">
-                    {rec.type === 'Above-Average' ? '📈' : rec.type === 'Anomalous' ? '🚨' : '⏲️'}
+                    {rec.type === 'Above-Average' ? <BarChart size={20} /> : rec.type === 'Anomalous' ? <Radio size={20} /> : <Timer size={20} />}
                   </div>
                   <div className="rec-content">
                     <h4 className="rec-title">{rec.type} Strategy</h4>
@@ -165,7 +170,7 @@ export default function Analytics() {
               ))
             ) : (
               <div className="empty-state">
-                <div className="empty-state-icon">🧠</div>
+                <div className="empty-state-icon"><Brain size={48} /></div>
                 <p className="empty-state-text">Waiting for real-time data...</p>
                 <span className="empty-state-sub">AI insights will appear once patterns are detected.</span>
               </div>
