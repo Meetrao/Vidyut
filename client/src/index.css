@@ -105,7 +105,7 @@ h1, h2, h3, h4, .display-font {
 .main-content {
   flex: 1;
   margin-left: var(--sidebar-width);
-  padding: 32px 40px;
+  padding: 20px 32px;
   max-width: 1440px;
   min-height: 100vh;
   width: 100%;
@@ -118,7 +118,7 @@ h1, h2, h3, h4, .display-font {
   -webkit-backdrop-filter: blur(28px) saturate(1.4);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-card);
-  padding: 24px;
+  padding: 18px;
   box-shadow: var(--shadow-md);
   transition: var(--transition-spring);
   position: relative;
@@ -161,7 +161,7 @@ h1, h2, h3, h4, .display-font {
 
 /* ═══ Neumorphic Buttons (Pill-Shaped) ═══ */
 .btn {
-  padding: 13px 30px;
+  padding: 10px 24px;
   border-radius: var(--radius-pill);
   border: none;
   font-weight: 600;
@@ -170,9 +170,9 @@ h1, h2, h3, h4, .display-font {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   text-decoration: none;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   letter-spacing: 0.02em;
   position: relative;
   font-family: var(--font-body);
@@ -227,7 +227,7 @@ h1, h2, h3, h4, .display-font {
 
 .form-input, .form-select {
   width: 100%;
-  padding: 14px 20px;
+  padding: 10px 16px;
   background: rgba(0, 0, 0, 0.25);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
@@ -235,7 +235,7 @@ h1, h2, h3, h4, .display-font {
   box-shadow: var(--neo-pressed);
   transition: var(--transition);
   outline: none;
-  font-size: 0.93rem;
+  font-size: 0.9rem;
   font-family: var(--font-body);
 }
 
@@ -264,7 +264,7 @@ h1, h2, h3, h4, .display-font {
 .page-subtitle {
   color: var(--text-secondary);
   font-size: 1.1rem;
-  margin-bottom: 24px;
+  margin-bottom: 12px;
   font-weight: 400;
   letter-spacing: 0.01em;
   opacity: 0.8;
@@ -361,20 +361,20 @@ h1, h2, h3, h4, .display-font {
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-bottom: 28px;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
 .charts-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 12px;
 }
 
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 12px;
 }
 
 /* ═══ Empty States ═══ */
@@ -418,8 +418,8 @@ h1, h2, h3, h4, .display-font {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 60px;
-  gap: 24px;
+  padding: 40px;
+  gap: 20px;
 }
 
 .loader-rings {
