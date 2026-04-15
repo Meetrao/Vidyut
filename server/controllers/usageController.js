@@ -231,21 +231,13 @@ exports.create = async (req, res) => {
     units = Number(units);
     cost = Number(cost);
 
-    // Fetch last 20 records for historical context
-    const history = await Usage.find().sort({ date: -1 }).limit(20);
-    const recordsToProcess = history.reverse().map(h => ({
-      date: h.date, units: Number(h.units), cost: Number(h.cost), source: h.source, hour: h.hour
-    }));
-    
-    // Append the new manual entry at the end
-    recordsToProcess.push({ date, units, cost, source, hour });
-
-    // Enrich with Python AI (Context-Aware)
-    const { ok, data } = await callPython('/process', { records: recordsToProcess });
+    // Enrich with Python AI (Anchored Intelligence)
+    // We only send the new record; app.py anchors the baseline to 8-25 kWh urban standard.
+    const { ok, data } = await callPython('/process', { records: [{ date, units, cost, source, hour }] });
     
     let finalData = { date, units, cost, source, hour };
     if (ok && data.records && data.records.length > 0) {
-      const enriched = data.records[data.records.length - 1];
+      const enriched = data.records[0];
       finalData.anomaly = enriched.anomaly;
       finalData.anomalyScore = enriched.anomalyScore;
       finalData.peakHour = enriched.peakHour;
