@@ -50,7 +50,7 @@ export default function Analytics() {
     Promise.all([getAnomalies(), getRecommendations(), getDaily()])
       .then(([aRes, rRes, dRes]) => {
         setAnomalies(aRes.data);
-        setRecommendations(rRes.data);
+        setRecommendations(rRes.data.recommendations || []);
         setDaily(dRes.data.slice(-30));
       })
       .finally(() => setLoading(false));
