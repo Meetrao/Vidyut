@@ -43,3 +43,23 @@
   .filter-card { flex-direction: column; align-items: stretch; }
   .filter-group input { width: 100% !important; }
 }
+
+.anomaly-row {
+  background: rgba(248, 113, 113, 0.05) !important;
+  position: relative;
+}
+
+.anomaly-row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent-red);
+  box-shadow: 0 0 10px rgba(248, 113, 113, 0.4);
+}
+
+.anomaly-row:hover {
+  background: rgba(248, 113, 113, 0.08) !important;
+}

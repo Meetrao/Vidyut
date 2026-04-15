@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getNotifications, markNotificationRead } from '../services/api';
 import './NotificationCenter.css';
 
@@ -7,6 +8,7 @@ export default function NotificationCenter() {
   const [isOpen, setIsOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(0);
   const dropdownRef = useRef(null);
+  const navigate = useNavigate();
 
   const fetchNotifications = async () => {
     try {
@@ -101,7 +103,15 @@ export default function NotificationCenter() {
           </div>
 
           <div className="dropdown-footer">
-            <button className="btn-text">View All History</button>
+            <button 
+              className="btn-text" 
+              onClick={() => {
+                setIsOpen(false);
+                navigate('/history');
+              }}
+            >
+              View All History
+            </button>
           </div>
         </div>
       )}

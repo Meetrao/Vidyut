@@ -71,13 +71,20 @@ export default function Analytics() {
       fill: true,
       tension: 0.4,
       pointBackgroundColor: (context) => {
-        const val = context.dataset.data[context.dataIndex];
-        return val > 2.5 ? '#f87171' : 'transparent';
+        const item = daily[context.dataIndex];
+        return item?.anomaly ? '#f87171' : 'transparent';
       },
-      pointBorderColor: '#fff',
+      pointBorderColor: (context) => {
+        const item = daily[context.dataIndex];
+        return item?.anomaly ? '#fff' : 'transparent';
+      },
       pointRadius: (context) => {
-        const val = context.dataset.data[context.dataIndex];
-        return val > 2.5 ? 6 : 0;
+        const item = daily[context.dataIndex];
+        return item?.anomaly ? 6 : 0;
+      },
+      pointHoverRadius: (context) => {
+        const item = daily[context.dataIndex];
+        return item?.anomaly ? 8 : 0;
       },
     }],
   };

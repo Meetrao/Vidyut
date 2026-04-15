@@ -111,7 +111,7 @@ export default function History() {
           <tbody>
             {usage.length > 0 ? (
               usage.map((u) => (
-                <tr key={u._id}>
+                <tr key={u._id} className={u.anomaly ? 'anomaly-row' : ''}>
                   <td style={{ fontWeight: 600 }}>{new Date(u.date).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</td>
                   <td>{u.units} kWh</td>
                   <td>₹{u.cost.toLocaleString('en-IN')}</td>
