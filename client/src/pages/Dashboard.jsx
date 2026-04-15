@@ -21,7 +21,7 @@ const CHART_OPTS = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: { 
-    legend: { labels: { color: 'var(--text-muted)', font: { size: 12, family: 'Inter' } } },
+    legend: { labels: { color: '#94a3b8', font: { size: 12, family: 'Inter' } } },
     tooltip: {
       backgroundColor: 'var(--tooltip-bg)',
       titleColor: 'var(--text-main)',
@@ -35,11 +35,11 @@ const CHART_OPTS = {
     }
   },
   scales: {
-    x: { ticks: { color: 'var(--text-muted)' }, grid: { color: 'var(--grid-line)' } },
+    x: { ticks: { color: '#64748b' }, grid: { color: 'rgba(255,255,255,0.05)' } },
     y: { 
-      ticks: { color: 'var(--text-muted)' }, 
-      grid: { color: 'var(--grid-line)' },
-      title: { display: true, text: 'Z-Score Intensity', color: 'var(--text-muted)' }
+      ticks: { color: '#64748b' }, 
+      grid: { color: 'rgba(255,255,255,0.05)' },
+      title: { display: true, text: 'Z-Score Intensity', color: '#94a3b8' }
     },
   },
 };
