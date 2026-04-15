@@ -164,8 +164,10 @@ export default function Analytics() {
                 </div>
               ))
             ) : (
-              <div className="empty-rec">
-                Gathering insights... Keep uploading data to see smart tips.
+              <div className="empty-state">
+                <div className="empty-state-icon">🧠</div>
+                <p className="empty-state-text">Waiting for real-time data...</p>
+                <span className="empty-state-sub">AI insights will appear once patterns are detected.</span>
               </div>
             )}
           </div>

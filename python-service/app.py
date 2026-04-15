@@ -177,7 +177,7 @@ def recommendations():
                 'saving': '10–20%',
             })
 
-        if not df.empty:
+        if not df.empty and ('units' in df.columns):
             trend = compute_trend(df)
             if trend['direction'] == 'increasing' and trend['slope'] > 5:
                 tips.append({
@@ -195,38 +195,10 @@ def recommendations():
                     'type': 'anomalies',
                     'severity': 'critical',
                     'title': f'{anomaly_count} Anomalous Reading(s) Detected',
-                    'message': 'Unusual spikes were detected. Check for faulty wiring, '
-                               'unauthorized appliance usage, or meter errors.',
+                    'message': f'Unusual spikes were detected. Check for faulty wiring or '
+                               'unauthorized appliance usage.',
                     'saving': 'Variable',
                 })
-
-        # General always-on tips
-        tips += [
-            {
-                'type': 'peak_hours',
-                'severity': 'info',
-                'title': 'Shift Load to Off-Peak Hours',
-                'message': 'Run heavy loads (washing machine, dishwasher) between 10 PM–6 AM '
-                           'to reduce peak-hour strain and save on time-of-use tariffs.',
-                'saving': '5–10%',
-            },
-            {
-                'type': 'lighting',
-                'severity': 'info',
-                'title': 'Switch to LED Lighting',
-                'message': 'LED bulbs use 75% less energy than incandescent bulbs '
-                           'and last 25x longer.',
-                'saving': '8–12%',
-            },
-            {
-                'type': 'standby',
-                'severity': 'info',
-                'title': 'Eliminate Standby Power',
-                'message': 'Standby mode can account for 10% of electricity bills. '
-                           'Use smart power strips or unplug devices not in use.',
-                'saving': '5–10%',
-            },
-        ]
 
         return jsonify({'recommendations': tips, 'avgMonthlyUnits': round(avg_units, 2)})
 
