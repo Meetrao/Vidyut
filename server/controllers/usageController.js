@@ -225,12 +225,16 @@ exports.exportCSV = async (req, res) => {
 // POST /api/usage
 exports.create = async (req, res) => {
   try {
-    const { date, units, cost, source, hour } = req.body;
+    let { date, units, cost, source, hour } = req.body;
     
+    // Strict numeric casting for manual entries
+    units = Number(units);
+    cost = Number(cost);
+
     // Fetch last 20 records for historical context
     const history = await Usage.find().sort({ date: -1 }).limit(20);
     const recordsToProcess = history.reverse().map(h => ({
-      date: h.date, units: h.units, cost: h.cost, source: h.source, hour: h.hour
+      date: h.date, units: Number(h.units), cost: Number(h.cost), source: h.source, hour: h.hour
     }));
     
     // Append the new manual entry at the end
@@ -241,11 +245,16 @@ exports.create = async (req, res) => {
     
     let finalData = { date, units, cost, source, hour };
     if (ok && data.records && data.records.length > 0) {
-      // The manual entry is the LAST record in the returned array
       const enriched = data.records[data.records.length - 1];
       finalData.anomaly = enriched.anomaly;
       finalData.anomalyScore = enriched.anomalyScore;
       finalData.peakHour = enriched.peakHour;
+      
+      console.log(`🛡️ Bharat Intelligence Verdict [${units} kWh]:`, {
+        anomaly: finalData.anomaly,
+        score: finalData.anomalyScore,
+        baseline: data.baseline
+      });
     }
 
     const record = await Usage.create(finalData);
@@ -255,6 +264,7 @@ exports.create = async (req, res) => {
 
     res.status(201).json(record);
   } catch (err) {
+    console.error('Manual Entry Error:', err.message);
     res.status(400).json({ error: err.message });
   }
 };
