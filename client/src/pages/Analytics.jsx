@@ -35,7 +35,7 @@ const CHART_OPTS = {
     y: { 
       ticks: { color: '#64748b' }, 
       grid: { color: 'rgba(255,255,255,0.05)' },
-      title: { display: true, text: 'Z-Score Intensity', color: '#94a3b8' }
+      title: { display: true, text: 'Breach Ratio Intensity', color: '#94a3b8' }
     },
   },
 };
@@ -65,8 +65,8 @@ export default function Analytics() {
   const anomalyChartData = {
     labels: daily.map((d) => fmtDate(d.date)),
     datasets: [{
-      label: 'Anomaly Intensity (Z-Score)',
-      data: daily.map((d) => d.anomalyScore || 0),
+      label: 'Anomaly Intensity (Breach Ratio)',
+      data: daily.map((d) => d.breachRatio || 0),
       borderColor: '#f87171',
       backgroundColor: 'rgba(248, 113, 113, 0.1)',
       fill: true,
@@ -95,7 +95,7 @@ export default function Analytics() {
 
       {/* Main Analysis Chart */}
       <div className="card full-width-chart animate-fade" style={{ marginBottom: 32 }}>
-        <h3 className="chart-title">Z-Score Intensity (Anomaly Detection)</h3>
+        <h3 className="chart-title">Breach Ratio Intensity (Anomaly Detection)</h3>
         <div style={{ height: 350 }}>
           <Line data={anomalyChartData} options={CHART_OPTS} />
         </div>
@@ -117,7 +117,7 @@ export default function Analytics() {
                 <tr>
                   <th>Date</th>
                   <th>Units</th>
-                  <th>Z-Score</th>
+                  <th>Breach Ratio</th>
                 </tr>
               </thead>
               <tbody>
@@ -126,7 +126,7 @@ export default function Analytics() {
                     <tr key={a._id}>
                       <td style={{ fontWeight: 600 }}>{new Date(a.date).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</td>
                       <td><span className="badge badge-blue">{a.units} kWh</span></td>
-                      <td><span className="badge badge-red">{a.anomalyScore.toFixed(2)}</span></td>
+                      <td><span className="badge badge-red">{a.breachRatio.toFixed(2)}</span></td>
                     </tr>
                   ))
                 ) : (

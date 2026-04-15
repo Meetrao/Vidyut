@@ -163,7 +163,7 @@ exports.getDaily = async (req, res) => {
 
     const records = await Usage.find(filter)
       .sort({ date: 1 })
-      .select('date units cost anomaly anomalyScore peakHour');
+      .select('date units cost anomaly breachRatio peakHour');
     res.json(records);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -173,7 +173,7 @@ exports.getDaily = async (req, res) => {
 // GET /api/usage/anomalies
 exports.getAnomalies = async (req, res) => {
   try {
-    const records = await Usage.find({ anomaly: true }).sort({ anomalyScore: -1 }).limit(100);
+    const records = await Usage.find({ anomaly: true }).sort({ breachRatio: -1 }).limit(100);
     res.json(records);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -203,13 +203,13 @@ exports.exportCSV = async (req, res) => {
     }
 
     const records = await Usage.find(filter).sort({ date: -1 });
-    const header = 'date,units,cost,source,anomaly,anomalyScore,peakHour\n';
+    const header = 'date,units,cost,source,anomaly,breachRatio,peakHour\n';
     const rows = records
       .map((r) =>
         [
           new Date(r.date).toISOString().split('T')[0],
           r.units, r.cost, r.source,
-          r.anomaly, r.anomalyScore, r.peakHour,
+          r.anomaly, r.breachRatio, r.peakHour,
         ].join(',')
       )
       .join('\n');
@@ -239,12 +239,12 @@ exports.create = async (req, res) => {
     if (ok && data.records && data.records.length > 0) {
       const enriched = data.records[0];
       finalData.anomaly = enriched.anomaly;
-      finalData.anomalyScore = enriched.anomalyScore;
+      finalData.breachRatio = enriched.breachRatio;
       finalData.peakHour = enriched.peakHour;
       
       console.log(`🛡️ Bharat Intelligence Verdict [${units} kWh]:`, {
         anomaly: finalData.anomaly,
-        score: finalData.anomalyScore,
+        score: finalData.breachRatio,
         baseline: data.baseline
       });
     }
@@ -285,7 +285,7 @@ exports.uploadCSV = async (req, res) => {
         hour: r.hour || null,
         peakHour: r.peakHour || false,
         anomaly: r.anomaly || false,
-        anomalyScore: r.anomalyScore || 0,
+        breachRatio: r.breachRatio || 0,
       }));
       anomalyCount = pyData.anomalyCount || 0;
       trend = pyData.trend || null;

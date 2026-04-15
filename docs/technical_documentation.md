@@ -45,7 +45,7 @@ graph TD
     User([User]) --> UI[React Client / Glassmorphic UI]
     UI -- JSON API Request --> Server[Express.js Server]
     Server -- Raw Data --> PythonService[Python Flask / AI Service]
-    PythonService -- Z-Score Analysis --> Server
+    PythonService -- AI Multiplier Analysis --> Server
     Server -- Store Results --> DB[(MongoDB)]
     Server -- Trigger Sentinel --> NT[Notification System]
     NT -- Socket.io --> UI
@@ -94,7 +94,7 @@ flowchart TD
     Start([User Login]) --> Dashboard[View Dashboard Metrics]
     Dashboard --> Upload{Upload CSV?}
     Upload -- Yes --> Process[Server Parses CSV]
-    Process --> AIDetect[Python Engine Calculates Z-Scores]
+    Process --> AIDetect[Python Engine Calculates Breach Ratios]
     AIDetect --> Anomaly{Anomaly Found?}
     Anomaly -- Yes --> Alert[Create Notification & Sentinel Breach]
     Anomaly -- No --> Healthy[Update Trend Analytics]
@@ -155,7 +155,7 @@ classDiagram
         +Number units
         +Number cost
         +Boolean anomaly
-        +Number zScore
+        +Number anomalyRatio
     }
 
     class Sentinel {

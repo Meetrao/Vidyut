@@ -38,8 +38,7 @@ const CHART_OPTS = {
     x: { ticks: { color: '#64748b' }, grid: { color: 'rgba(255,255,255,0.05)' } },
     y: { 
       ticks: { color: '#64748b' }, 
-      grid: { color: 'rgba(255,255,255,0.05)' },
-      title: { display: true, text: 'Z-Score Intensity', color: '#94a3b8' }
+      grid: { color: 'rgba(255,255,255,0.05)' }
     },
   },
 };
