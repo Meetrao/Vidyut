@@ -7,7 +7,7 @@ import {
 import { Line } from 'react-chartjs-2';
 import { getAnomalies, getRecommendations, getDaily } from '../services/api';
 import Loader from '../components/Loader';
-import { AlertCircle, Lightbulb, BarChart, Radio, Timer, Brain, Sparkles } from '../components/Icons';
+import { AlertCircle, Lightbulb, Brain, Sparkles, Zap } from '../components/Icons';
 import './Analytics.css';
 
 ChartJS.register(

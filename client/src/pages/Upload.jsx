@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useToast } from '../components/Toast';
 import { uploadCSV, addUsage } from '../services/api';
 import { Link } from 'react-router-dom';
-import { Export, Cloud, Zap, BarChart, AlertCircle, Sparkles } from '../components/Icons';
+import { BarChart, Cloud, Zap } from '../components/Icons';
 import './Upload.css';
 
 export default function Upload() {

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { getAlerts, deleteAlert } from '../services/api';
 import { useToast } from '../components/Toast';
 import Loader from '../components/Loader';
-import { Zap, Radio, Coins, BarChart, Trash, Bell } from '../components/Icons';
+import { BarChart, Trash, Bell } from '../components/Icons';
 import './Alerts.css';
 
 export default function Alerts() {

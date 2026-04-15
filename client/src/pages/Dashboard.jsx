@@ -48,7 +48,7 @@ export default function Dashboard() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [filters, setFilters] = useState({ from: '', to: '', peakOnly: false });
+  const [filters] = useState({ from: '', to: '', peakOnly: false });
 
   useEffect(() => {
     const params = {};
