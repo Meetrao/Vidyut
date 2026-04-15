@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import Logo from './Logo';
 import './Sidebar.css';
 
 const NAV_ITEMS = [
@@ -22,10 +23,10 @@ export default function Sidebar() {
   return (
     <aside className="sidebar">
       <div className="sidebar-brand">
-        <div className="brand-icon">⚡</div>
+        <Logo size={52} />
         <div className="brand-text">
           <h1>VIDYUT</h1>
-          <span>Smart Dashboard</span>
+          <span>Energy Intelligence</span>
         </div>
       </div>
 

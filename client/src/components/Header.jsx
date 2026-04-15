@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import NotificationCenter from './NotificationCenter';
+import Logo from './Logo';
 import './Header.css';
 
 export default function Header() {
@@ -24,11 +25,18 @@ export default function Header() {
     <header className="main-header animate-fade">
       <div className="header-left">
         <div className="breadcrumb">
+          <Logo size={20} className="header-brand-logo" />
           <span className="root">VIDYUT</span>
           <span className="separator">/</span>
           <span className="current">{getPageTitle()}</span>
         </div>
-        <h2 className="header-title">{getPageTitle()}</h2>
+        <div className="header-title-row">
+          <h2 className="header-title">{getPageTitle()}</h2>
+          <div className="sync-indicator">
+            <span className="sync-dot"></span>
+            Real-time Sync Active
+          </div>
+        </div>
       </div>
 
       <div className="header-right">

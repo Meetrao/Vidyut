@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { login as loginService } from '../services/api';
 import { useToast } from '../components/Toast';
+import Logo from '../components/Logo';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -29,7 +30,7 @@ export default function Login() {
     <div className="auth-container animate-fade">
       <div className="auth-card card">
         <div className="auth-header">
-          <div className="auth-logo">⚡</div>
+          <Logo size={64} className="auth-logo-center" />
           <h1 className="auth-title">VIDYUT</h1>
           <p className="auth-subtitle">Energy Intelligence Portal</p>
         </div>

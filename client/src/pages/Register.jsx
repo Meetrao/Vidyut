@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { register } from '../services/api';
 import { useToast } from '../components/Toast';
+import Logo from '../components/Logo';
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -31,7 +32,7 @@ export default function Register() {
     <div className="auth-container animate-fade">
       <div className="auth-card card">
         <div className="auth-header">
-          <div className="auth-logo">⚡</div>
+          <Logo size={64} className="auth-logo-center" />
           <h1 className="auth-title">VIDYUT</h1>
           <p className="auth-subtitle">Create Network Account</p>
         </div>
