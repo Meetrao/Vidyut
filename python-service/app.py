@@ -32,8 +32,10 @@ def detect_anomalies(df: pd.DataFrame, threshold: float = 1.8):
         return df
 
     z_scores = np.abs(stats.zscore(units_series))
-    df['anomalyScore'] = z_scores.round(4)
-    df['anomaly'] = (z_scores > threshold).fillna(False)
+    df['anomalyScore'] = np.round(z_scores, 4)
+    # Ensure we handle any potential NaNs from the calculation
+    mask = (z_scores > threshold)
+    df['anomaly'] = np.where(np.isnan(mask), False, mask)
     return df
 
 def compute_trend(df: pd.DataFrame):
