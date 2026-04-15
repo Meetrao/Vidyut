@@ -56,6 +56,48 @@
   --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Semantic Chart Extensions */
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --tooltip-bg: rgba(1, 22, 22, 0.95);
+}
+
+/* ═══ Light Mode Overrides ═══ */
+.light-mode {
+  --bg-space: #f8fafc;
+  --bg-deep-teal: #f1f5f9;
+  --bg-surface: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.7);
+  --bg-card-hover: rgba(255, 255, 255, 0.9);
+
+  --emerald-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --accent-mint: #064e3b;
+  --accent-aqua: #0f766e;
+
+  /* Glass layers */
+  --glass-white: rgba(0, 0, 0, 0.03);
+  --glass-mint: rgba(16, 185, 129, 0.05);
+  --glass-teal: rgba(16, 185, 129, 0.08);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-border-hover: rgba(0, 0, 0, 0.18);
+  --glass-highlight: rgba(255, 255, 255, 0.8);
+
+  /* Shadow system (Softer for Light Mode) */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.12);
+  
+  --neo-raised: 6px 6px 12px rgba(0, 0, 0, 0.05), -6px -6px 12px rgba(255, 255, 255, 0.8);
+  --neo-pressed: inset 2px 2px 6px rgba(0, 0, 0, 0.05), inset -2px -2px 6px rgba(255, 255, 255, 0.8);
+
+  /* Typography */
+  --text-main: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+
+  /* Semantic Chart Extensions */
+  --grid-line: rgba(0, 0, 0, 0.05);
+  --tooltip-bg: rgba(255, 255, 255, 0.98);
 }
 
 /* ═══ Reset ═══ */

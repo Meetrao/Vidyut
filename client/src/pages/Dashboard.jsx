@@ -20,21 +20,26 @@ const CHART_OPTS = {
   responsive: true,
   maintainAspectRatio: false,
   plugins: { 
-    legend: { labels: { color: '#94a3b8', font: { size: 12, family: 'Inter' } } },
+    legend: { labels: { color: 'var(--text-muted)', font: { size: 12, family: 'Inter' } } },
     tooltip: {
-      backgroundColor: 'rgba(1, 22, 22, 0.95)',
+      backgroundColor: 'var(--tooltip-bg)',
+      titleColor: 'var(--text-main)',
+      bodyColor: 'var(--text-main)',
       titleFont: { size: 14, family: 'Outfit' },
       bodyFont: { size: 13, family: 'Inter' },
-      padding: 14,
-      cornerRadius: 14,
-      borderColor: 'rgba(16, 185, 129, 0.25)',
-      borderWidth: 1,
-      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3)'
+      padding: 12,
+      cornerRadius: 12,
+      borderColor: 'var(--accent-emerald)',
+      borderWidth: 1
     }
   },
   scales: {
-    x: { ticks: { color: '#64748b' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-    y: { ticks: { color: '#64748b' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+    x: { ticks: { color: 'var(--text-muted)' }, grid: { color: 'var(--grid-line)' } },
+    y: { 
+      ticks: { color: 'var(--text-muted)' }, 
+      grid: { color: 'var(--grid-line)' },
+      title: { display: true, text: 'Z-Score Intensity', color: 'var(--text-muted)' }
+    },
   },
 };
 

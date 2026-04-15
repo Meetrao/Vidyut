@@ -39,6 +39,7 @@ export default function Header() {
       </div>
 
       <div className="header-right">
+        <ThemeToggle />
         <NotificationCenter />
         
         <div className="v-divider"></div>
