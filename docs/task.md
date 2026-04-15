@@ -1,0 +1,5 @@
+- [ ] Add Activity, Database, Shield, Power, and ArrowRight icons to `Icons.jsx`
+- [ ] Replace navigation emojis and arrows in `Sidebar.jsx` with bespoke SVGs
+- [ ] Replace logout emoji in `Sidebar.jsx` with bespoke `<Power />` SVG
+- [ ] Update `Sidebar.css` to sync SVG alignment and hover effects
+- [ ] Final visual audit of Sidebar iconography
