@@ -227,12 +227,22 @@ exports.create = async (req, res) => {
   try {
     const { date, units, cost, source, hour } = req.body;
     
-    // Enrich manual entry with Python AI
-    const { ok, data } = await callPython('/process', { records: [{ date, units, cost, source, hour }] });
+    // Fetch last 20 records for historical context
+    const history = await Usage.find().sort({ date: -1 }).limit(20);
+    const recordsToProcess = history.reverse().map(h => ({
+      date: h.date, units: h.units, cost: h.cost, source: h.source, hour: h.hour
+    }));
+    
+    // Append the new manual entry at the end
+    recordsToProcess.push({ date, units, cost, source, hour });
+
+    // Enrich with Python AI (Context-Aware)
+    const { ok, data } = await callPython('/process', { records: recordsToProcess });
     
     let finalData = { date, units, cost, source, hour };
     if (ok && data.records && data.records.length > 0) {
-      const enriched = data.records[0];
+      // The manual entry is the LAST record in the returned array
+      const enriched = data.records[data.records.length - 1];
       finalData.anomaly = enriched.anomaly;
       finalData.anomalyScore = enriched.anomalyScore;
       finalData.peakHour = enriched.peakHour;
