@@ -153,16 +153,16 @@ export default function Analytics() {
           <div className="rec-list">
             {recommendations.length > 0 ? (
               recommendations.map((rec, i) => (
-                <div key={i} className="rec-item">
+                <div key={i} className="rec-item animate-fade">
                   <div className="rec-icon">
-                    {rec.type === 'Above-Average' ? <BarChart size={20} /> : rec.type === 'Anomalous' ? <Radio size={20} /> : <Timer size={20} />}
+                    {rec.type === 'seasonal' ? <Sparkles size={20} /> : rec.type === 'high_usage' ? <AlertCircle size={20} /> : <Zap size={20} />}
                   </div>
                   <div className="rec-content">
-                    <h4 className="rec-title">{rec.type} Strategy</h4>
+                    <h4 className="rec-title">{rec.title}</h4>
                     <p className="rec-text">{rec.message}</p>
                     <div className="rec-footer">
-                      <span className={`badge ${rec.priority === 'High' ? 'badge-red' : 'badge-green'}`}>
-                        {rec.savings} SAVINGS
+                      <span className={`badge ${rec.severity === 'critical' ? 'badge-red' : rec.severity === 'warning' ? 'badge-blue' : 'badge-green'}`}>
+                        {rec.saving} ESTIMATED SAVINGS
                       </span>
                     </div>
                   </div>
