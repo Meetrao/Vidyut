@@ -18,7 +18,7 @@ CORS(app)
 
 PEAK_HOURS = list(range(18, 23))  # 6 PM – 10 PM
 
-def detect_anomalies(df: pd.DataFrame, threshold: float = 2.5):
+def detect_anomalies(df: pd.DataFrame, threshold: float = 1.8):
     """Z-score based anomaly detection on units column."""
     if 'units' not in df.columns or len(df) < 3:
         df['anomaly'] = False

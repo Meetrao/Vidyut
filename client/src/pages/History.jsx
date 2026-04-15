@@ -2,26 +2,29 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { getUsage, deleteUsage, exportUsage } from '../services/api';
 import { useToast } from '../components/Toast';
 import Loader from '../components/Loader';
-import { Export, Trash } from '../components/Icons';
+import { Export, Trash, ArrowRight } from '../components/Icons';
 import './History.css';
 
 export default function History() {
   const [usage, setUsage] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({ from: '', to: '' });
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const { add } = useToast();
 
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await getUsage(filters);
-      setUsage(res.data.records || res.data);
+      const res = await getUsage({ ...filters, page, limit: 15 });
+      setUsage(res.data.records);
+      setTotalPages(res.data.pages || 1);
     } catch (err) {
       add('Failed to fetch history', 'error');
     } finally {
       setLoading(false);
     }
-  }, [filters, add]);
+  }, [filters, page, add]);
 
   useEffect(() => {
     fetchData();
@@ -132,6 +135,28 @@ export default function History() {
           </tbody>
         </table>
       </div>
+
+      {totalPages > 1 && (
+        <div className="pagination-bar animate-fade">
+          <button 
+            className="btn-pagination" 
+            disabled={page === 1}
+            onClick={() => setPage(p => Math.max(1, p - 1))}
+          >
+            <ArrowRight size={18} style={{ transform: 'rotate(180deg)' }} />
+          </button>
+          <span className="page-info">
+            Page <span className="current">{page}</span> of <span className="total">{totalPages}</span>
+          </span>
+          <button 
+            className="btn-pagination" 
+            disabled={page === totalPages}
+            onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+          >
+            <ArrowRight size={18} />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

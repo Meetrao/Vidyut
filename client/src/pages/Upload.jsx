@@ -37,7 +37,15 @@ export default function Upload() {
 
     try {
       const res = await uploadCSV(formData);
-      add(`Successfully imported ${res.data.inserted} records!`, 'success');
+      const total = res.data.inserted;
+      const anomalies = res.data.anomalyCount;
+      
+      if (anomalies > 0) {
+        add(`Imported ${total} records. Alert: ${anomalies} anomalies detected!`, 'warning');
+      } else {
+        add(`Successfully imported ${total} records. No anomalies detected.`, 'success');
+      }
+      
       setSummary(res.data);
       setFile(null);
     } catch (err) {
