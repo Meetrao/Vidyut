@@ -9,7 +9,6 @@ const NAV_ITEMS = [
   { path: '/upload', icon: <Cloud size={20} />, label: 'Upload CSV' },
   { path: '/analytics', icon: <Activity size={20} />, label: 'Analytics' },
   { path: '/history', icon: <Database size={20} />, label: 'History' },
-  { path: '/alerts', icon: <Bell size={20} />, label: 'Alerts' },
 ];
 
 export default function Sidebar() {

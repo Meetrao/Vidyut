@@ -5,7 +5,6 @@ import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import Upload from './pages/Upload';
 import History from './pages/History';
-import Alerts from './pages/Alerts';
 import Analytics from './pages/Analytics';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
@@ -30,7 +29,6 @@ function ProtectedLayout() {
           <Route path="/upload" element={<Upload />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/history" element={<History />} />
-          <Route path="/alerts" element={<Alerts />} />
           <Route path="/admin" element={<AdminGuard />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
