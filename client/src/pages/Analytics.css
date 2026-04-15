@@ -10,7 +10,7 @@
 }
 
 .section-title {
-  font-size: 1.2rem;
+  font-size: var(--fs-xl);
   font-weight: 700;
   color: var(--text-main);
   display: flex;
@@ -19,7 +19,7 @@
 }
 
 .section-desc {
-  font-size: 0.82rem;
+  font-size: var(--fs-sm);
   color: var(--text-muted);
   margin-top: 4px;
 }
@@ -35,9 +35,9 @@
 .rec-item {
   display: flex;
   gap: 16px;
-  padding: 18px;
+  padding: 16px;
   background: rgba(255, 255, 255, 0.02);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   border: 1px solid var(--glass-border);
   transition: var(--transition);
 }
@@ -49,16 +49,15 @@
 }
 
 .rec-icon {
-  font-size: 1.4rem;
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  background: rgba(0, 0, 0, 0.2);
+  font-size: 1.2rem;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  background: rgba(15, 23, 42, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--radius-sm);
-  box-shadow: var(--neo-pressed);
+  border-radius: var(--radius-md);
 }
 
 .rec-content {
@@ -66,17 +65,17 @@
 }
 
 .rec-title {
-  font-size: 0.92rem;
+  font-size: var(--fs-base);
   font-weight: 700;
   color: var(--accent-emerald);
   margin-bottom: 4px;
 }
 
 .rec-text {
-  font-size: 0.83rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-  margin-bottom: 10px;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
 }
 
 .rec-footer {
