@@ -12,6 +12,7 @@ export const uploadCSV = (formData) =>
 export const deleteUsage = (id) => API.delete(`/usage/${id}`);
 export const exportUsage = (params) =>
   API.get('/usage/export', { params, responseType: 'blob' });
+export const purgeSystemData = () => API.delete('/usage/admin/purge');
 
 // Alerts
 export const getAlerts = () => API.get('/alerts');

@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Logo from './Logo';
-import { Zap, Cloud, Activity, Database, Bell, Shield, Power, ArrowRight } from './Icons';
+import { Zap, Cloud, Activity, Database, Shield, Power, ArrowRight } from './Icons';
 import './Sidebar.css';
 
 const NAV_ITEMS = [
