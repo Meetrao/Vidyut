@@ -321,3 +321,20 @@ exports.remove = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// DELETE /api/usage/admin/purge - [ADMIN ONLY]
+exports.purgeAll = async (req, res) => {
+  try {
+    const Usage = require('../models/Usage');
+    const Alert = require('../models/Alert');
+    const Notification = require('../models/Notification');
+    
+    await Usage.deleteMany({});
+    await Alert.deleteMany({});
+    await Notification.deleteMany({});
+    
+    res.json({ success: true, message: 'System purified to Absolute Zero.' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

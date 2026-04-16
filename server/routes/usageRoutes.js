@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const controller = require('../controllers/usageController');
-const { authenticate } = require('../middleware/auth');
+const { authenticate, requireAdmin } = require('../middleware/auth');
 
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -18,5 +18,6 @@ router.get('/', controller.getAll);
 router.post('/', controller.create);
 router.post('/upload', upload.single('file'), controller.uploadCSV);
 router.delete('/:id', controller.remove);
+router.delete('/admin/purge', requireAdmin, controller.purgeAll);
 
 module.exports = router;

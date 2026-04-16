@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { getUsers, updateUserRole, deleteUser } from '../services/api';
+import { getUsers, updateUserRole, deleteUser, purgeSystemData } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../components/Toast';
 import Loader from '../components/Loader';
@@ -48,6 +48,17 @@ export default function Admin() {
     }
   };
 
+  const handlePurge = async () => {
+    if (!window.confirm('WARNING: This will permanently delete ALL consumption data and alerts. Proceed to Absolute Zero?')) return;
+    try {
+      await purgeSystemData();
+      add('System Purified to Absolute Zero', 'success');
+      window.location.reload(); 
+    } catch (err) {
+      add('Purge failed', 'error');
+    }
+  };
+
   if (loading) return <div className="loader-container"><Loader /></div>;
 
   return (
@@ -61,6 +72,15 @@ export default function Admin() {
         <div className="admin-stat-item">
           <span className="stat-label">Network Status</span>
           <h2 className="stat-value" style={{ color: 'var(--accent-emerald)' }}>ONLINE</h2>
+        </div>
+        <div className="admin-stat-item" style={{ marginLeft: 'auto', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: 40 }}>
+           <button 
+             className="btn btn-red"
+             style={{ padding: '12px 24px', fontSize: '0.85rem', fontWeight: 700, letterSpacing: '0.05em' }}
+             onClick={handlePurge}
+           >
+             PURGE ABSOLUTE ZERO
+           </button>
         </div>
       </div>
 
