@@ -4,8 +4,8 @@ import { API } from '../context/AuthContext';
 export const getUsage = (params) => API.get('/usage', { params });
 export const getStats = (params) => API.get('/usage/stats', { params });
 export const getDaily = (params) => API.get('/usage/daily', { params });
-export const getAnomalies = () => API.get('/usage/anomalies');
-export const getRecommendations = () => API.get('/usage/recommendations');
+export const getAnomalies = (params) => API.get('/usage/anomalies', { params });
+export const getRecommendations = (params) => API.get('/usage/recommendations', { params });
 export const addUsage = (data) => API.post('/usage', data);
 export const uploadCSV = (formData) =>
   API.post('/usage/upload', formData, { headers: { 'Content-Type': 'multipart/form-data' } });

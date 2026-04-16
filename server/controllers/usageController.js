@@ -173,7 +173,11 @@ exports.getDaily = async (req, res) => {
 // GET /api/usage/anomalies
 exports.getAnomalies = async (req, res) => {
   try {
-    const records = await Usage.find({ anomaly: true }).sort({ breachRatio: -1 }).limit(100);
+    const filter = { anomaly: true };
+    if (req.query.from) filter.date = { ...filter.date, $gte: new Date(req.query.from) };
+    if (req.query.to) filter.date = { ...filter.date, $lte: new Date(req.query.to) };
+
+    const records = await Usage.find(filter).sort({ date: -1 }).limit(100);
     res.json(records);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -183,7 +187,11 @@ exports.getAnomalies = async (req, res) => {
 // GET /api/usage/recommendations
 exports.getRecommendations = async (req, res) => {
   try {
-    const records = await Usage.find().sort({ date: 1 }).select('date units cost anomaly');
+    const filter = {};
+    if (req.query.from) filter.date = { ...filter.date, $gte: new Date(req.query.from) };
+    if (req.query.to) filter.date = { ...filter.date, $lte: new Date(req.query.to) };
+
+    const records = await Usage.find(filter).sort({ date: 1 }).select('date units cost anomaly');
     const { ok, data } = await callPython('/recommendations', { records });
     if (!ok) return res.json({ recommendations: [], avgMonthlyUnits: 0 });
     res.json(data);

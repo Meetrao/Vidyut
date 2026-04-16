@@ -45,16 +45,28 @@ export default function Analytics() {
   const [recommendations, setRecommendations] = useState([]);
   const [daily, setDaily] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({ from: '', to: '' });
+  const [tempFilters, setTempFilters] = useState({ from: '', to: '' });
 
   useEffect(() => {
-    Promise.all([getAnomalies(), getRecommendations(), getDaily()])
+    setLoading(true);
+    Promise.all([
+      getAnomalies(filters),
+      getRecommendations(filters),
+      getDaily(filters)
+    ])
       .then(([aRes, rRes, dRes]) => {
         setAnomalies(aRes.data);
         setRecommendations(rRes.data.recommendations || []);
-        setDaily(dRes.data.slice(-30));
+        // If filtering, we might want to show all daily records in the chart, not just last 30
+        setDaily(filters.from || filters.to ? dRes.data : dRes.data.slice(-30));
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [filters]);
+
+  const handleApplyFilters = () => {
+    setFilters({ ...tempFilters });
+  };
 
   if (loading) return <div className="loader-container"><Loader /></div>;
 
@@ -92,6 +104,49 @@ export default function Analytics() {
 
   return (
     <div className="animate-fade">
+
+      {/* Sentinel Filter Bar */}
+      <div className="card filter-bar animate-fade" style={{ marginBottom: 32, display: 'flex', gap: 20, alignItems: 'flex-end', padding: '24px 30px' }}>
+        <div style={{ flex: 1 }}>
+          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#94a3b8', marginBottom: 8, letterSpacing: '0.05em' }}>OBSERVATION START</label>
+          <input 
+            type="date" 
+            className="form-input" 
+            style={{ width: '100%' }}
+            value={tempFilters.from}
+            onChange={(e) => setTempFilters({ ...tempFilters, from: e.target.value })}
+          />
+        </div>
+        <div style={{ flex: 1 }}>
+          <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#94a3b8', marginBottom: 8, letterSpacing: '0.05em' }}>OBSERVATION END</label>
+          <input 
+            type="date" 
+            className="form-input" 
+            style={{ width: '100%' }}
+            value={tempFilters.to}
+            onChange={(e) => setTempFilters({ ...tempFilters, to: e.target.value })}
+          />
+        </div>
+        <button 
+          className="btn btn-emerald" 
+          style={{ height: 42, padding: '0 24px', fontWeight: 700, letterSpacing: '0.05em' }}
+          onClick={handleApplyFilters}
+        >
+          APPLY FILTERS
+        </button>
+        {(filters.from || filters.to) && (
+          <button 
+            className="btn btn-ghost" 
+            style={{ height: 42, color: '#f87171' }}
+            onClick={() => {
+              setTempFilters({ from: '', to: '' });
+              setFilters({ from: '', to: '' });
+            }}
+          >
+            CLEAR
+          </button>
+        )}
+      </div>
 
       {/* Main Analysis Chart */}
       <div className="card full-width-chart animate-fade" style={{ marginBottom: 32 }}>
