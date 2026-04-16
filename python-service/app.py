@@ -179,15 +179,30 @@ def recommendations():
                 'saving': '20–30%',
             })
 
-        # Summer AC Logic
-        current_month = pd.to_datetime('today').month
-        if current_month in [4, 5, 6]:
+        # Summer/Winter Logic based on Data Context
+        target_month = pd.to_datetime('today').month
+        if not df.empty and 'date' in df.columns:
+            # Anchor season to the latest record in the provided data
+            target_month = pd.to_datetime(df['date']).max().month
+
+        # Summer (Peak Cooling)
+        if target_month in [4, 5, 6]:
             tips.append({
                 'type': 'seasonal',
                 'severity': 'warning',
                 'title': 'Summer Cooling Strategy',
                 'message': 'Keep ACs at 24°C-26°C for optimal BEE savings. Clean filters for 15% better efficiency.',
                 'saving': '15%',
+            })
+        
+        # Winter (Peak Heating/Geyser)
+        if target_month in [12, 1]:
+            tips.append({
+                'type': 'seasonal',
+                'severity': 'warning',
+                'title': 'Winter Geyser Optimization',
+                'message': 'Geysers account for 40% of winter bills. Set thermostat to 60°C and use for 15 mins to save 20%.',
+                'saving': '20%',
             })
         
         # Inverter/BEE Logic
