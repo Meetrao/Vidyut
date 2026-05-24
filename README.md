@@ -1,4 +1,4 @@
-# VIDYUT (विद्युत) ⚡
+# VIDYUT ⚡
 ### High-Fidelity Energy Intelligence & Bharat-Aware Analytics
 
 **Vidyut** is a next-generation energy monitoring ecosystem designed to transform raw electricity usage into high-fidelity actionable intelligence. Unlike generic dashboards, Vidyut combines a **Luxe UI/UX design philosophy** with a specialized **Python-powered statistical microservice** tailored for the Indian energy landscape (Bharat).
